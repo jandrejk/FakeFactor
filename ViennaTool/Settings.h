@@ -146,6 +146,7 @@ const Double_t TAU_PT_CUT=20.;
 const Double_t TAU_ETA_CUT_TT=2.1;
 const Double_t TAU_PT_CUT_TT=40.;
 const Double_t MT_CUT=50; 
+const Double_t MT_CUT_QCD=40; 
 
 const Double_t MZ=91.2; // used in preselection for Z candidate selection
 const Double_t QCD_SS_TO_OS=1.06;

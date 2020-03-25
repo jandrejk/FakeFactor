@@ -327,7 +327,7 @@ TString GlobalClass::getCRCutString(const Int_t mode){
         s_mode += " * (lep_q*alltau_q[0]>0.0) * (passesDLVeto > 0.5) * (passes3LVeto > 0.5)";
       }
     }else{
-      s_mode = "(alltau_mt[0] < "+to_string(MT_CUT)+")";
+      s_mode = "(alltau_mt[0] < "+to_string(MT_CUT_QCD)+")";
       s_mode += " * (lep_q * alltau_q[0] >= 0) * (passesDLVeto > 0.5) * (passes3LVeto > 0.5) ";
       if( !CALC_SS_SR * !(mode & _AI) ){
         if( !(mode & MUISO) ) s_mode += " * (lep_iso > "+to_string(lep_iso_min)+") * (lep_iso < "+to_string(lep_iso_max)+") ";
@@ -429,9 +429,9 @@ Int_t GlobalClass::isInCR(const Int_t mode, const Int_t ind)
            )
     returnVal=1;
   else if ((mode & _QCD)                  &&
-	   (  ( !CALC_SS_SR && !(mode & _AI) && event_s->alltau_mt->at(ind)<MT_CUT && event_s->lep_q*event_s->alltau_q->at(ind)>0.  && ( ( event_s->lep_iso > lep_iso_min && event_s->lep_iso<lep_iso_max) || ( mode & MUISO ) ) ) || //TRY
-	      (  (CALC_SS_SR) && event_s->alltau_mt->at(ind)<MT_CUT   && event_s->lep_q*event_s->alltau_q->at(ind)<0. && ( ( event_s->lep_iso > antiIso_min && event_s->lep_iso<antiIso_max ) || ( mode & MUISO) )   ) || //TRY
-              (  mode & _AI && event_s->alltau_mt->at(ind)<MT_CUT   &&   ( event_s->lep_iso > antiIso_min && event_s->lep_iso<antiIso_max )                     ) ) && //TRY
+	   (  ( !CALC_SS_SR && !(mode & _AI) && event_s->alltau_mt->at(ind)<MT_CUT_QCD && event_s->lep_q*event_s->alltau_q->at(ind)>0.  && ( ( event_s->lep_iso > lep_iso_min && event_s->lep_iso<lep_iso_max) || ( mode & MUISO ) ) ) || //TRY
+	      (  (CALC_SS_SR) && event_s->alltau_mt->at(ind)<MT_CUT_QCD   && event_s->lep_q*event_s->alltau_q->at(ind)<0. && ( ( event_s->lep_iso > antiIso_min && event_s->lep_iso<antiIso_max ) || ( mode & MUISO) )   ) || //TRY
+              (  mode & _AI && event_s->alltau_mt->at(ind)<MT_CUT_QCD   &&   ( event_s->lep_iso > antiIso_min && event_s->lep_iso<antiIso_max )                     ) ) && //TRY
 	   //	   (  ( !CALC_SS_SR && event_s->alltau_mt->at(ind)<MT_CUT   && ( event_s->lep_iso<LEP_ISO_CUT || ( mode & MUISO ) ) ) || //DEFAULT
 	   //	      (  CALC_SS_SR                                     && event_s->lep_iso>LEP_ISO_CUT )   ) && //DEFAULT
            (event_s->lep_q*event_s->alltau_q->at(ind)>=0.) &&
