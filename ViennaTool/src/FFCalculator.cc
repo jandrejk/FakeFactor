@@ -951,11 +951,12 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
       nL=this->isLoose(mode,tau_index); 
       
       if (nT) {
-        ccc_t++;
+        // ccc_t++;
+        // std::cout << "bin index: " << this->getBin(mode,tau_index) << std::endl;
         counter_histo_tight_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
       }
       else if (nL) {
-        ccc_l++;
+        // ccc_l++;
         counter_histo_loose_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
 
       }
@@ -963,6 +964,7 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
     }
   } //end loop over entries
 
+  
   end  = std::chrono::system_clock::now();
   elapsed_seconds = end-start;
 
@@ -1059,10 +1061,6 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
     
   }
 
-
-
-
-
   counter_histo_numer->Add(counter_histo_tight_CR);
   counter_histo_denom->Add(counter_histo_loose_CR);
 
@@ -1084,6 +1082,7 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
 
   counter_histo_numer->Add(counter_histo_numer_SS,-1.);
   counter_histo_denom->Add(counter_histo_denom_SS,-1.);
+  
   std::cout << "QCD SUB TIGHT: Actual integral after QCD sub " << counter_histo_numer->Integral() << std::endl;
   std::cout << "QCD SUB LOOSE: Actual integral after QCD sub " << counter_histo_denom->Integral() << std::endl;
 
@@ -1110,7 +1109,6 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   f.cd();
   
   fakefactor_histo = counter_histo_numer; 
-  
   //  fakefactor_histo->Divide(counter_histo_denom); //uncorrelated errors
   fakefactor_histo->Divide(fakefactor_histo,counter_histo_denom,1,1); //Gaussian error propagation
   counter_histo_numer_mcup->Divide(counter_histo_denom_mcup);
