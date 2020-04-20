@@ -8,19 +8,19 @@
 #define selCHAN      kMU
 const int CHAN     = kMU;
 // FakeFactor_2016_DeepTauIDv2_v0
-const TString analysis      ="2018";
-const TString output_folder ="/ceph/jbechtel/auto-fakefactors/2018";
+const TString analysis      ="2018_v15_test";
+const TString output_folder ="/ceph/jandrej/2018_v15_test";
 const TString ver = "2018"; // first time nanoAODv5 with deepTauIDv2 
 
 const TString _NtupleTreeName = "TauCheck"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
 const TString _NtupleTreeName_KIT = "mt_nominal/ntuple"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
 const TString DC_folder     ="/afs/hephy.at/work/j/jandrejkovic/ff_method/CMSSW_8_0_25/src/HTTutilities/Jet2TauFakes/data"; //obsolete
 ///////////////////////////////////////////////////
-const TString user="jbechtel";    
+const TString user="jandrej";    
 const Double_t luminosity=59.74; //according to GOLDEN JSON see https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM    
 const TString ERA = "2018"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
-const int DEBUG=0; //set to 1 for additional output
+const int DEBUG=1; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
 
 ///////////////////////////////////////////////////
@@ -146,6 +146,7 @@ const Double_t TAU_PT_CUT=20.;
 const Double_t TAU_ETA_CUT_TT=2.1;
 const Double_t TAU_PT_CUT_TT=40.;
 const Double_t MT_CUT=50; 
+const Double_t MT_CUT_QCD=40; 
 
 const Double_t MZ=91.2; // used in preselection for Z candidate selection
 const Double_t QCD_SS_TO_OS=1.06;
