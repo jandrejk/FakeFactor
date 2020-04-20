@@ -1514,10 +1514,8 @@ void FFCalculator::calc_nonclosure(const Int_t mode, const TString raw_ff, const
   TGraphAsymmErrors *dm0njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet1"+tight_cat); fittedFFs.push_back(dm0njet1);
   TGraphAsymmErrors *dm1njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet1"+tight_cat); fittedFFs.push_back(dm1njet1);
   
-  if (mode & _QCD) { // ToDo: for more jet categories
-    TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
-    TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2);
-  }
+  TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
+  TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2);
 
   
   TFile compare(cr_file);
@@ -1868,6 +1866,8 @@ void FFCalculator::calc_nonclosure_W_lepPt(const Int_t mode, const TString raw_f
     TGraphAsymmErrors *dm1njet0 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet0"+tight_cat); fittedFFs.push_back(dm1njet0);
     TGraphAsymmErrors *dm0njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet1"+tight_cat); fittedFFs.push_back(dm0njet1);
     TGraphAsymmErrors *dm1njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet1"+tight_cat); fittedFFs.push_back(dm1njet1);
+    TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
+    TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2);  
   }
   
   TFile compare(cr_file);
@@ -2676,10 +2676,8 @@ void FFCalculator::calc_OSSScorr(const Int_t mode, const TString raw_ff, const T
   TGraphAsymmErrors *dm1njet0 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet0"+tight_cat); fittedFFs.push_back(dm1njet0);
   TGraphAsymmErrors *dm0njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet1"+tight_cat); fittedFFs.push_back(dm0njet1);
   TGraphAsymmErrors *dm1njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet1"+tight_cat); fittedFFs.push_back(dm1njet1);
-  if (mode & _QCD) { // ToDo: for more jet categories
-    TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
-    TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2);
-  }
+  TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
+  TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2);
 
   TFile nonclosure(nonclosure_corr.ReplaceAll(".root",tight_cat+".root"));
   if(nonclosure.IsZombie()) cout << nonclosure_corr << " does not exist" << endl;
@@ -2875,6 +2873,8 @@ void FFCalculator::calc_mtcorr(const Int_t mode, const TString raw_ff, const TSt
     TGraphAsymmErrors *dm1njet0 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet0"+tight_cat); fittedFFs.push_back(dm1njet0);
     TGraphAsymmErrors *dm0njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet1"+tight_cat); fittedFFs.push_back(dm0njet1);
     TGraphAsymmErrors *dm1njet1 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet1"+tight_cat); fittedFFs.push_back(dm1njet1);
+    TGraphAsymmErrors *dm0njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm0_njet2"+tight_cat); fittedFFs.push_back(dm0njet2);
+    TGraphAsymmErrors *dm1njet2 = (TGraphAsymmErrors*) FF_lookup.Get("dm1_njet2"+tight_cat); fittedFFs.push_back(dm1njet2); 
   }
   TFile nonclosure(nonclosure_corr);
   TH1D* nonclosure_h = (TH1D*) nonclosure.Get("nonclosure_fit_smoothed");
