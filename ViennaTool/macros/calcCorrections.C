@@ -57,8 +57,8 @@ void calcCorrections() {
     // first need to perform the AI non closure correction before the SS-OS can be done because it depends on it.
     Analyzer->calc_nonclosure(_QCD|_AI,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,   CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI,      "",0);
     Analyzer->calc_OSSScorr(_QCD|_AI,                             p+FF_corr_QCD_MCsum_noGen_AI_fitted,   SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI,      p+FF_corr_QCD_MCsum_noGen_OSSScorr,"",0);
+
     
-  
     if( doNJetBinning ){
       // QCD
       Analyzer->calc_nonclosure(_QCD|JET0,                          p+FF_corr_QCD_MCsum_noGen_fitted,      CR_QCD_mvis_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_0jet,"",0);

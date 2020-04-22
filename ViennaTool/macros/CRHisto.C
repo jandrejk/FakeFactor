@@ -150,6 +150,7 @@ void CRHisto(int doCalc, int nCR, int nQU) {
     for (int iv=0; iv<nVARused; iv++){ //loop over mt, mvis, pt, muiso
       CallCRHisto_creation (Analyzer, ivar[iv], icr[ic], scr[ic], tvarCR[iv]);  
     }
+    exit(0);
   }
 
 

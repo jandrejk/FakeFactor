@@ -218,7 +218,7 @@ void fitFakeFactors(){
         TGraphAsymmErrors *g_fit=cf.returnFitGraph();              //the fit result binned (histo)
         TGraphAsymmErrors *g_fit2=new TGraphAsymmErrors( *g_fit );
 
-        double ymax = 0.5; 
+        double ymax = 0.7; 
         double ymin = 0.001;
         
         for(int i=0; i<g_fit->GetN(); i++) {
