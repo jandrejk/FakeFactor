@@ -82,17 +82,17 @@ void CalcFF() {
   if (CHAN!=kTAU){
     cout << endl << "################### Calculating FFs         ###############" << endl << endl;
     
-    // cout << "Calculating TT FFs" << endl; 
-    // Analyzer->calcFFCorr(_TT|m_gen_match,                        m_preselection_data,   pre_sub_tt,          p+FF_corr_TT_MCsum_noGen,     p+weight_TT_J);   
-    // Analyzer->calcFFCorr(_TT|m_gen_match,                        preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only,               p+weight_TT_J);
-    // Analyzer->calcFFCorr(_TT|m_gen_match|SR,                     preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only_SR,            p+weight_TT_J);
+    cout << "Calculating TT FFs" << endl; 
+    Analyzer->calcFFCorr(_TT|m_gen_match,                        m_preselection_data,   pre_sub_tt,          p+FF_corr_TT_MCsum_noGen,     p+weight_TT_J);   
+    Analyzer->calcFFCorr(_TT|m_gen_match,                        preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only,               p+weight_TT_J);
+    Analyzer->calcFFCorr(_TT|m_gen_match|SR,                     preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only_SR,            p+weight_TT_J);
 
     
-    // cout << "Calculating W+Jets FFs" << endl;
-    // Analyzer->calcFFCorr(_W_JETS|m_gen_match,                    m_preselection_data,   pre_sub_wj,          p+FF_corr_Wjets_MCsum_noGen,  p+weight_Wjets);
+    cout << "Calculating W+Jets FFs" << endl;
+    Analyzer->calcFFCorr(_W_JETS|m_gen_match,                    m_preselection_data,   pre_sub_wj,          p+FF_corr_Wjets_MCsum_noGen,  p+weight_Wjets);
     Analyzer->calcFFCorr(_W_JETS|m_gen_match,                    preselection_Wjets,    empty_vec_tstring,   p+FF_corr_Wjets_MC_noGen,     p+weight_Wjets);
-    std::cout << "comment back in - for now leave program" << std::endl;
-    exit(0);
+    // std::cout << "comment back in - for now leave program" << std::endl;
+    // exit(0);
 
     cout << "Calculating QCD FFs" << endl;
     Analyzer->calcFFCorr(_QCD|m_gen_match,                       m_preselection_data,   pre_sub_qcd,         p+FF_corr_QCD_MCsum_noGen,    p+weight_QCD);

@@ -267,6 +267,8 @@ public :
    Float_t         m_2;
    Float_t           q_2;
    Float_t         d0_2;
+   Float_t         ptvis;
+   Float_t         pt_tt_puppi;
    Float_t         dZ_2;
    Float_t         mt_2;
    Float_t         pfmt_2;
@@ -739,6 +741,8 @@ public :
    TBranch        *b_m_2;   //!
    TBranch        *b_q_2;   //!
    TBranch        *b_d0_2;   //!
+   TBranch        *b_ptvis;
+   TBranch        *b_pt_tt_puppi;
    TBranch        *b_dZ_2;   //!
    TBranch        *b_mt_2;   //!
    TBranch        *b_pfmt_2;   //!
@@ -1296,6 +1300,8 @@ void NtupleClass::Init(TTree *tree)
    fChain->SetBranchAddress("m_2", &m_2, &b_m_2);
    fChain->SetBranchAddress("q_2", &q_2, &b_q_2);
    fChain->SetBranchAddress("d0_2", &d0_2, &b_d0_2);
+   fChain->SetBranchAddress("ptvis", &ptvis, &b_ptvis);
+   fChain->SetBranchAddress("pt_tt_puppi", &pt_tt_puppi, &b_pt_tt_puppi);
    fChain->SetBranchAddress("dZ_2", &dZ_2, &b_dZ_2);
    fChain->SetBranchAddress("mt_2", &mt_2, &b_mt_2);
    fChain->SetBranchAddress("pfmt_2", &pfmt_2, &b_pfmt_2);

@@ -42,7 +42,7 @@ class TNtupleAnalyzer{
   double mvamet; double met;
   double otherLep_pt,otherLep_eta,otherLep_phi,otherLep_m,otherLep_iso;
   int    otherLep_q;
-  double lep_pt,lep_eta,lep_phi,lep_m,lep_iso;
+  double lep_pt,lep_eta,lep_phi,lep_m,lep_iso,pt_vis,pt_tt_puppi;
   double lep_vvvloose,lep_vvloose,lep_vloose,lep_loose,lep_medium; // only needed for tt channel
   int    lep_q, lep_gen_match;
   int n_iso_lep, n_iso_otherLep;

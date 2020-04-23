@@ -245,6 +245,8 @@ void TNtupleAnalyzer::SetNewEventInfo() {
   n_iso_otherLep=0;
 
   lep_pt=event->pt_1;
+  pt_vis=event->ptvis;
+  pt_tt_puppi=event->pt_tt_puppi;
   lep_eta=event->eta_1;
   lep_phi=event->phi_1;
   lep_iso=event->iso_1;
@@ -784,6 +786,8 @@ void TNtupleAnalyzer::initOutfileTree(TTree* tree)
   tree->Branch("otherLep_q"  ,&otherLep_q);
   tree->Branch("otherLep_iso",&otherLep_iso);
   tree->Branch("lep_pt" ,&lep_pt);	//TODO: TLorentzVector
+  tree->Branch("pt_vis" ,&pt_vis);	//TODO: TLorentzVector
+  tree->Branch("pt_tt_puppi" ,&pt_tt_puppi);	//TODO: TLorentzVector
   tree->Branch("lep_eta",&lep_eta);
   tree->Branch("lep_phi",&lep_phi);
   tree->Branch("lep_q"  ,&lep_q);
