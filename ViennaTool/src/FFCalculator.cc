@@ -915,8 +915,9 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   
 
   
-  // TString cutstringgg = this->getCRCutString(mode); // used with Draw: for the moment event loop is faster 
-  
+  TString cutstringgg = this->getCRCutString(mode); // used with Draw: for the moment event loop is faster 
+  std::cout<<cutstringgg<<std::endl;
+  exit(0);
 
   int ccc_t = 0;
   int ccc_l = 0;
@@ -2316,7 +2317,7 @@ void FFCalculator::calc_nonclosure_lepPt(const Int_t mode, const TString raw_ff,
     }
     TH1D* closure_h_mcup = (TH1D*)closure_h->Clone("closure_h_mcup");
     TH1D* closure_h_mcdown = (TH1D*)closure_h->Clone("closure_h_mcdown");
-
+    
     closure_h->Multiply(ratio_l);
     closure_h_mcup->Multiply(ratio_l_mcup);
     closure_h_mcdown->Multiply(ratio_l_mcdown);
@@ -2966,8 +2967,7 @@ void FFCalculator::calc_mtcorr(const Int_t mode, const TString raw_ff, const TSt
   for (Int_t jentry=0; jentry<nentries;jentry++) {
       event_s->GetEntry(jentry);
       if (DEBUG){ if(jentry % 100000 == 0) cout << jentry << "/" << nentries << endl; }
-      
-      if (  this->isInSR(mode,tau_ind) && this->isLoose(mode,tau_ind) ){
+      if (  this->isInSR(mode,tau_ind) && this->isLoose(mode,tau_ind) && event_s->alltau_mt->at(tau_ind)<70){
         if( !raw_ff.Contains("_fitted") ) FF_value = FF_lookup_h->GetBinContent( this->getBin(mode|tau_ind)+1 );
         else if( raw_ff.Contains("_fitted") ){
           FF_value = this->getFittedBinContent( mode, fittedFFs );

@@ -43,8 +43,12 @@ void calcCorrections() {
   if(CHAN!=kTAU){
  
     Analyzer->loadFile(m_preselection_data,"Events");
-    Analyzer->calc_nonclosure(_QCD,                               p+FF_corr_QCD_MCsum_noGen_fitted,      CR_QCD_mvis_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure,"",0);
+    Analyzer->calc_nonclosure(      _QCD,                       p+FF_corr_QCD_MCsum_noGen_fitted,      CR_QCD_mvis_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure,"",0);
     
+    Analyzer->calc_nonclosure_lepPt(_QCD,                       p+FF_corr_QCD_MCsum_noGen_fitted,        CR_QCD_lepPt_data_MCsubtracted,   p+FF_corr_QCD_MCsum_noGen_nonclosure,    p+FF_corr_QCD_MCsum_noGen_nonclosure_lepPt,"",0);
+
+    // Analyzer->calc_nonclosure_lepPt(_QCD,                       p+FF_corr_QCD_MCsum_noGen_fitted,      CR_QCD_lepPt_data_MCsubtracted,   p+FF_corr_QCD_MCsum_noGen_nonclosure,    p+FF_corr_QCD_MCsum_noGen_nonclosure_lepPt,"",0);
+    exit(0);
     if (usePt_nonclosure_Wjets ) {
       Analyzer->calc_nonclosure_W_lepPt(_W_JETS,   p+FF_corr_Wjets_MCsum_noGen_fitted,    CR_Wjets_lepPt_data_MCsubtracted, p+FF_corr_Wjets_MCsum_noGen_nonclosure, "",0);
     }
@@ -102,10 +106,10 @@ void calcCorrections() {
     Analyzer->loadFile(preselection_Wjets,"Events");
     
     if (usePt_nonclosure_Wjets) {
-      Analyzer->calc_mtcorr(     _W_JETS|NO_SR,                         p+FF_corr_Wjets_MC_noGen_fitted,        CR_Wjets_mvis_nosr_Wjets, p+FF_corr_Wjets_MC_noGen_nonclosure_lepPt,      p+FF_corr_Wjets_MC_noGen_mtcorr,"",0);
+      Analyzer->calc_mtcorr(     _W_JETS|NO_SR,                         p+FF_corr_Wjets_MC_noGen_fitted,        CR_Wjets_mvis_mt70_Wjets, p+FF_corr_Wjets_MC_noGen_nonclosure_lepPt,      p+FF_corr_Wjets_MC_noGen_mtcorr,"",0);
     }
     else {
-      Analyzer->calc_mtcorr(   _W_JETS|NO_SR,                         p+FF_corr_Wjets_MC_noGen_fitted,        CR_Wjets_mvis_nosr_Wjets, p+FF_corr_Wjets_MC_noGen_nonclosure,               p+FF_corr_Wjets_MC_noGen_mtcorr,"",0);
+      Analyzer->calc_mtcorr(   _W_JETS|NO_SR,                         p+FF_corr_Wjets_MC_noGen_fitted,        CR_Wjets_mvis_mt70_Wjets, p+FF_corr_Wjets_MC_noGen_nonclosure,               p+FF_corr_Wjets_MC_noGen_mtcorr,"",0);
     }
  
     if( doNJetBinning ){
