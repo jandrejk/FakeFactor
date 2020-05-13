@@ -161,7 +161,7 @@ public :
    Float_t           q_1;
    Float_t         d0_1;
    Float_t         dZ_1;
-   Float_t         mt_1;
+   Float_t         mt_1_puppi;
    Float_t         pfmt_1;
    Float_t         iso_1;
    Float_t           againstElectronLooseMVA6_1;
@@ -270,7 +270,7 @@ public :
    Float_t         ptvis;
    Float_t         pt_tt_puppi;
    Float_t         dZ_2;
-   Float_t         mt_2;
+   Float_t         mt_2_puppi;
    Float_t         pfmt_2;
    Float_t         iso_2;
    Float_t           againstElectronLooseMVA6_2;
@@ -420,8 +420,8 @@ public :
    Bool_t          extraelec_veto;
    Bool_t          extramuon_veto;
    Float_t         uncorrmet;
-   Float_t         met;
-   Float_t         metphi;
+   Float_t         puppimet;
+   Float_t         puppimetphi;
    Float_t         met_ex;
    Float_t         met_ey;
    Float_t         corrmet;
@@ -642,7 +642,7 @@ public :
    TBranch        *b_q_1;   //!
    TBranch        *b_d0_1;   //!
    TBranch        *b_dZ_1;   //!
-   TBranch        *b_mt_1;   //!
+   TBranch        *b_mt_1_puppi;   //!
    TBranch        *b_pfmt_1;   //!
    TBranch        *b_iso_1;   //!
    TBranch        *b_againstElectronLooseMVA6_1;   //!
@@ -744,7 +744,7 @@ public :
    TBranch        *b_ptvis;
    TBranch        *b_pt_tt_puppi;
    TBranch        *b_dZ_2;   //!
-   TBranch        *b_mt_2;   //!
+   TBranch        *b_mt_2_puppi;   //!
    TBranch        *b_pfmt_2;   //!
    TBranch        *b_iso_2;   //!
    TBranch        *b_againstElectronLooseMVA6_2;   //!
@@ -880,8 +880,8 @@ public :
    TBranch        *b_extraelec_veto;   //!
    TBranch        *b_extramuon_veto;   //!
    TBranch        *b_uncorrmet;   //!
-   TBranch        *b_met;   //!
-   TBranch        *b_metphi;   //!
+   TBranch        *b_puppimet;   //!
+   TBranch        *b_puppimetphi;   //!
    TBranch        *b_met_ex;   //!
    TBranch        *b_met_ey;   //!
    TBranch        *b_corrmet;   //!
@@ -1238,7 +1238,7 @@ void NtupleClass::Init(TTree *tree)
    fChain->SetBranchAddress("q_1", &q_1, &b_q_1);
    fChain->SetBranchAddress("d0_1", &d0_1, &b_d0_1);
    fChain->SetBranchAddress("dZ_1", &dZ_1, &b_dZ_1);
-   fChain->SetBranchAddress("mt_1", &mt_1, &b_mt_1);
+   fChain->SetBranchAddress("mt_1_puppi", &mt_1_puppi, &b_mt_1_puppi);
    fChain->SetBranchAddress("pfmt_1", &pfmt_1, &b_pfmt_1);
    fChain->SetBranchAddress("iso_1", &iso_1, &b_iso_1);
    fChain->SetBranchAddress("againstElectronLooseMVA6_1", &againstElectronLooseMVA6_1, &b_againstElectronLooseMVA6_1);
@@ -1303,7 +1303,7 @@ void NtupleClass::Init(TTree *tree)
    fChain->SetBranchAddress("ptvis", &ptvis, &b_ptvis);
    fChain->SetBranchAddress("pt_tt_puppi", &pt_tt_puppi, &b_pt_tt_puppi);
    fChain->SetBranchAddress("dZ_2", &dZ_2, &b_dZ_2);
-   fChain->SetBranchAddress("mt_2", &mt_2, &b_mt_2);
+   fChain->SetBranchAddress("mt_2_puppi", &mt_2_puppi, &b_mt_2_puppi);
    fChain->SetBranchAddress("pfmt_2", &pfmt_2, &b_pfmt_2);
    fChain->SetBranchAddress("iso_2", &iso_2, &b_iso_2);
    fChain->SetBranchAddress("againstElectronLooseMVA6_2", &againstElectronLooseMVA6_2, &b_againstElectronLooseMVA6_2);
@@ -1452,8 +1452,8 @@ void NtupleClass::Init(TTree *tree)
    fChain->SetBranchAddress("extraelec_veto", &extraelec_veto, &b_extraelec_veto);
    fChain->SetBranchAddress("extramuon_veto", &extramuon_veto, &b_extramuon_veto);
    fChain->SetBranchAddress("uncorrmet", &uncorrmet, &b_uncorrmet);
-   fChain->SetBranchAddress("met", &met, &b_met);
-   fChain->SetBranchAddress("metphi", &metphi, &b_metphi);
+   fChain->SetBranchAddress("puppimet", &puppimet, &b_puppimet);
+   fChain->SetBranchAddress("puppimetphi", &puppimetphi, &b_puppimetphi);
    fChain->SetBranchAddress("met_ex", &met_ex, &b_met_ex);
    fChain->SetBranchAddress("met_ey", &met_ey, &b_met_ey);
    fChain->SetBranchAddress("corrmet", &corrmet, &b_corrmet);

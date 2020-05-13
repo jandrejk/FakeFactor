@@ -146,12 +146,12 @@ void TNtupleAnalyzer::GetWeights(const TString preselectionFile) {
     if( CHAN == kTAU ){ // CHANGE IF TAU WP CHANGES! https://twiki.cern.ch/twiki/bin/view/CMS/TauIDRecommendation13TeV#Tau_ID_SF_for_CMSSW_9_4_X_or_hig
           if(event->gen_match_1 == 5 && event->byTightDeepTau2017v2p1VSjet_1) weight *= event->tauIDScaleFactorWeight_tight_DeepTau2017v2p1VSjet_1;
           else if(event->gen_match_1 == 5 && event->byVLooseDeepTau2017v2p1VSjet_1 ) weight *= event->tauIDScaleFactorWeight_vloose_DeepTau2017v2p1VSjet_1;
-          if(event->gen_match_2 == 5 && event->byTightDeepTau2017v2p1VSjet_2) weight *= event->tauIDScaleFactorWeight_tight_DeepTau2017v2p1VSjet_1;
-          else if(event->gen_match_2 == 5 && event->byVLooseDeepTau2017v2p1VSjet_2 ) weight *= event->tauIDScaleFactorWeight_vloose_DeepTau2017v2p1VSjet_1;
+          if(event->gen_match_2 == 5 && event->byTightDeepTau2017v2p1VSjet_2) weight *= event->tauIDScaleFactorWeight_tight_DeepTau2017v2p1VSjet_2;
+          else if(event->gen_match_2 == 5 && event->byVLooseDeepTau2017v2p1VSjet_2 ) weight *= event->tauIDScaleFactorWeight_vloose_DeepTau2017v2p1VSjet_2;
     }
     if( CHAN != kTAU ){
-        if(event->gen_match_2 == 5 && event->byTightDeepTau2017v2p1VSjet_2) weight *= event->tauIDScaleFactorWeight_tight_DeepTau2017v2p1VSjet_1;
-        else if(event->gen_match_2 == 5 && event->byVLooseDeepTau2017v2p1VSjet_2 ) weight *= event->tauIDScaleFactorWeight_vloose_DeepTau2017v2p1VSjet_1;
+        if(event->gen_match_2 == 5 && event->byTightDeepTau2017v2p1VSjet_2) weight *= event->tauIDScaleFactorWeight_tight_DeepTau2017v2p1VSjet_2;
+        else if(event->gen_match_2 == 5 && event->byVLooseDeepTau2017v2p1VSjet_2 ) weight *= event->tauIDScaleFactorWeight_vloose_DeepTau2017v2p1VSjet_2;
     }
   }
   weight_sf=weight;
@@ -234,7 +234,7 @@ void TNtupleAnalyzer::SetNewEventInfo() {
   nbtag=event->nbtag;
   njets=event->njets;
   mjj=event->mjj;
-  met=event->met;
+  met=event->puppimet;
   jdeta=event->jdeta;
   njetingap20=event->njetingap20;
   mu2_iso=-999;  
@@ -517,8 +517,8 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
     alltau_lepVeto->insert(alltau_lepVeto->begin()+tpos,passesTauLepVetos);
     alltau_gen_match->insert(alltau_gen_match->begin()+tpos,event->gen_match_2);
     alltau_mvis->insert(alltau_mvis->begin()+tpos,event->m_vis);
-    alltau_mt->insert(alltau_mt->begin()+tpos,event->mt_1);
-    alltau_mt2->insert(alltau_mt2->begin()+tpos,event->mt_2);
+    alltau_mt->insert(alltau_mt->begin()+tpos,event->mt_1_puppi);
+    alltau_mt2->insert(alltau_mt2->begin()+tpos,event->mt_2_puppi);
     
     if(use_svfit)alltau_svfit->insert(alltau_svfit->begin()+tpos,event->m_sv);
     else alltau_svfit->insert(alltau_svfit->begin()+tpos,0.);
@@ -526,7 +526,7 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
     TLorentzVector leg2; leg2.SetPtEtaPhiM(event->pt_2,event->eta_2,event->phi_2,event->m_2);
     TLorentzVector leg1; leg1.SetPtEtaPhiM(event->pt_1,event->eta_1,event->phi_1,event->m_1);
     TLorentzVector Emiss;
-    Emiss.SetPtEtaPhiM(event->met,0,event->metphi,0);
+    Emiss.SetPtEtaPhiM(event->puppimet,0,event->puppimetphi,0);
     alltau_Zpt->insert( alltau_Zpt->begin()+tpos,(leg1+leg2+Emiss).Pt() );
       
     dR1=1e6;
@@ -583,14 +583,14 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
       alltau_lepVeto->insert(alltau_lepVeto->begin()+tpos,passesTauLepVetos);
       alltau_gen_match->insert(alltau_gen_match->begin()+tpos,event->gen_match_1);
       alltau_mvis->insert(alltau_mvis->begin()+tpos,event->m_vis);
-      alltau_mt->insert(alltau_mt->begin()+tpos,event->mt_2);
-      alltau_mt2->insert(alltau_mt2->begin()+tpos,event->mt_1);
+      alltau_mt->insert(alltau_mt->begin()+tpos,event->mt_2_puppi);
+      alltau_mt2->insert(alltau_mt2->begin()+tpos,event->mt_1_puppi);
       if(use_svfit)alltau_svfit->insert(alltau_svfit->begin()+tpos,event->m_sv);
       else alltau_svfit->insert(alltau_svfit->begin()+tpos,0.);
       TLorentzVector leg2; leg2.SetPtEtaPhiM(event->pt_2,event->eta_2,event->phi_2,event->m_2);
       TLorentzVector leg1; leg1.SetPtEtaPhiM(event->pt_1,event->eta_1,event->phi_1,event->m_1);
       TLorentzVector Emiss;
-      Emiss.SetPtEtaPhiM(event->met,0,event->metphi,0);
+      Emiss.SetPtEtaPhiM(event->puppimet,0,event->puppimetphi,0);
       alltau_Zpt->insert( alltau_Zpt->begin()+tpos,(leg1+leg2+Emiss).Pt() );
       
       dR1=1e6;
