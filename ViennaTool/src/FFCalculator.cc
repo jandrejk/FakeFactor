@@ -1112,20 +1112,28 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   std::cout << "QCD SUB TIGHT: Integral ss data before MC sub " << counter_histo_numer_SS->Integral() << std::endl;
   std::cout << "QCD SUB LOOSE: Integral ss data before MC sub " << counter_histo_denom_SS->Integral() << std::endl;
 
-  for (unsigned is=0; is<=pre_sub.size(); is++){ // = includes the W+jets subtraction.
-    counter_histo_numer_SS->Add(counter_histo_tight_CR_SS_cont.at(is),-1.);
-    counter_histo_denom_SS->Add(counter_histo_loose_CR_SS_cont.at(is),-1.);
+  if ((mode & _W_JETS) && (pre_sub.size() > 0)) {
+    for (unsigned is=0; is<=pre_sub.size(); is++){ // = includes the W+jets subtraction.
+      counter_histo_numer_SS->Add(counter_histo_tight_CR_SS_cont.at(is),-1.);
+      counter_histo_denom_SS->Add(counter_histo_loose_CR_SS_cont.at(is),-1.);
+    }
+  }
+  else {
+    for (unsigned is=0; is<pre_sub.size(); is++){
+      counter_histo_numer_SS->Add(counter_histo_tight_CR_SS_cont.at(is),-1.);
+      counter_histo_denom_SS->Add(counter_histo_loose_CR_SS_cont.at(is),-1.);
+    }    
   }
   // check for negative bin entries in QCD and set it 1
   for (unsigned b=0; b<counter_histo_numer_SS->GetNbinsX(); b++) {
     if (counter_histo_numer_SS->GetBinContent(b+1) < 0) {
       std::cout << "problematic bin content in numer" << std::endl;
-      counter_histo_numer_SS->SetBinContent(b+1,1);
+      counter_histo_numer_SS->SetBinContent(b+1,0);
       counter_histo_numer_SS->SetBinError(b+1,1);
     }
     if (counter_histo_denom_SS->GetBinContent(b+1) < 0) {
       std::cout << "problematic bin content in denom" << std::endl;
-      counter_histo_denom_SS->SetBinContent(b+1,1);
+      counter_histo_denom_SS->SetBinContent(b+1,0);
       counter_histo_denom_SS->SetBinError(b+1,1);
     }
   }
@@ -1168,7 +1176,26 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   TString ff_file=FF_file; 
   TFile f(ff_file,"RECREATE");
   f.cd();
-  
+  for (unsigned is=0; is<pre_sub.size(); is++){ 
+    counter_histo_tight_CR_cont.at(is)->Write();
+    counter_histo_loose_CR_cont.at(is)->Write();
+    counter_histo_tight_CR_SS_cont.at(is)->Write();
+    counter_histo_loose_CR_SS_cont.at(is)->Write();
+  }
+  if ( (mode & _W_JETS) && (pre_sub.size() > 0) ) { //Need to add W+jets MC for QCD estimation in the SS region
+    counter_histo_tight_CR_SS_cont.at(pre_sub.size())->Write();
+    counter_histo_loose_CR_SS_cont.at(pre_sub.size())->Write();
+  }
+
+  counter_histo_numer->SetName("numer");
+  counter_histo_numer->Write();
+  counter_histo_numer_SS->Write();
+  counter_histo_denom->Write();
+  counter_histo_denom_SS->Write();
+  counter_histo_tight_CR_SS->SetName("data_SS_numer");
+  counter_histo_tight_CR_SS->Write();
+  counter_histo_loose_CR_SS->SetName("data_SS_denom");
+  counter_histo_loose_CR_SS->Write();
   fakefactor_histo = counter_histo_numer; 
   //  fakefactor_histo->Divide(counter_histo_denom); //uncorrelated errors
   fakefactor_histo->Divide(fakefactor_histo,counter_histo_denom,1,1); //Gaussian error propagation
@@ -1185,6 +1212,8 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   counter_histo_numer_mcdown->Write();
 
   
+
+
   // filling histogram weighted_bin_center_loose in loose background control region CR
   for(Int_t ijets=0;ijets<this->getNjets(mode);ijets++){
     for(Int_t idm=0;idm<this->getNtracks(mode);idm++){
