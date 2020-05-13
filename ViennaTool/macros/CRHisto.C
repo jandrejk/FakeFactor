@@ -171,7 +171,7 @@ void CRHisto(int doCalc, int nCR, int nQU) {
   //get SS Wjet histogramms for SS mvis Wjets closure
   CallCRHisto_creation(Analyzer, MVIS, _W_JETS|_AI, s_Wjets, s_mvis+"_SS" );
   
-  CallCRHisto_creation(Analyzer, LEPPT, _W_JETS|_AI, s_Wjets, "lepPt_SS" );
+  CallCRHisto_creation(Analyzer, LEPPT, _W_JETS|_SS, s_Wjets, "lepPt_SS" );
   
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //get Wjet SS histos for corrections

@@ -311,7 +311,7 @@ TString GlobalClass::getCRCutString(const Int_t mode){
     if( !(mode & NO_SR) ) s_mode += " * (alltau_mt[0] > 70)";
     if( CHAN == kTAU ) s_mode += " * (lep_iso > "+to_string(TAU1_ISO_CUT)+")";
     else s_mode += " * (lep_iso < "+to_string(isolation)+")";
-    if( mode & _AI ) s_mode += "* (lep_q*alltau_q[0]>0.0)";
+    if( mode & _SS ) s_mode += "* (lep_q*alltau_q[0]>0.0)";
     else s_mode += "* (lep_q*alltau_q[0]<0.0)";
   }
   else if( mode & _QCD ){
