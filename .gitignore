@@ -6,6 +6,16 @@ ViennaTool/NtupleClass_NonEMB.h
 *.xgb
 *.keras
 ViennaTool/Images_EMB/*
+ViennaTool/*.out
+ViennaTool/*.txt
+ViennaTool/._*
+.DS_Store
+ViennaTool/.DS_Store
+._.DS_Store
+ViennaTool/DR_closure_plots/*
+ViennaTool/corr/*
+ViennaTool/plots/*
+ViennaTool/sim/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -121,6 +131,7 @@ NtupleClass.o
 PlotterClass.o
 Preselection
 Preselection_EMB
+Preselection_KIT
 SRHisto
 SignalClass.o
 TNtupleAnalyzer.o
