@@ -83,13 +83,16 @@ void CalcFF() {
     cout << endl << "################### Calculating FFs         ###############" << endl << endl;
     
     cout << "Calculating TT FFs" << endl; 
-    Analyzer->calcFFCorr(_TT|m_gen_match,                        m_preselection_data,   pre_sub_tt,          p+FF_corr_TT_MCsum_noGen,     p+weight_TT_J);   
-    Analyzer->calcFFCorr(_TT|m_gen_match,                        preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only,               p+weight_TT_J);
-    Analyzer->calcFFCorr(_TT|m_gen_match|SR,                     preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only_SR,            p+weight_TT_J);
+    // Analyzer->calcFFCorr(_TT|m_gen_match,                        m_preselection_data,   pre_sub_tt,          p+FF_corr_TT_MCsum_noGen,     p+weight_TT_J);   
+    // Analyzer->calcFFCorr(_TT|m_gen_match,                        preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only,               p+weight_TT_J);
+    // Analyzer->calcFFCorr(_TT|m_gen_match|SR,                     preselection_TT_J_EMB,     empty_vec_tstring,   p+FF_TT_J_only_SR,            p+weight_TT_J);
 
     
     cout << "Calculating W+Jets FFs" << endl;
     Analyzer->calcFFCorr(_W_JETS|m_gen_match,                    m_preselection_data,   pre_sub_wj,          p+FF_corr_Wjets_MCsum_noGen,  p+weight_Wjets);
+    std::cout << "exit for now" << std::endl;
+    exit(0);
+    
     Analyzer->calcFFCorr(_W_JETS|m_gen_match,                    preselection_Wjets,    empty_vec_tstring,   p+FF_corr_Wjets_MC_noGen,     p+weight_Wjets);
   
     cout << "Calculating QCD FFs" << endl;
