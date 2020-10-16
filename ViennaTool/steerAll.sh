@@ -64,18 +64,18 @@ cp -rs ${output}/preselection/${chan}/preselection_${process}_J_EMB.root  ${outp
 cp -rs ${output}/preselection/${chan}/preselection_${process}_L_EMB.root  ${output}/preselection/${chan}/preselection_${process}_L.root
 done
 
-#./SRHisto &
-#./CRHisto &
-#wait
+./SRHisto &
+./CRHisto &
+wait
 
-#./steerFF
-#./fitFakeFactors
-#cd ViennaTool/Images_EMB/data_$chan
-#gs -dSAFER -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=toCheck.pdf $ff_tocheck
-#cd -
+./steerFF
+./fitFakeFactors
+cd ViennaTool/Images_EMB/data_$chan
+gs -dSAFER -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=toCheck.pdf $ff_tocheck
+cd -
 
-# ./calcCorrections
-#python plotCorrections.py --channel $channel  --doNjetBinning $njetbinning --usePt_nonclosure_Wjets $usePt_nonclosure
+./calcCorrections
+python plotCorrections.py --channel $channel  --doNjetBinning $njetbinning --usePt_nonclosure_Wjets $usePt_nonclosure
 
 ./convert_inputs
 
