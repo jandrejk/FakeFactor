@@ -6,11 +6,11 @@
 ///////////////////////////////////////////////////
 #define EMB          1  
 #define selCHAN      kTAU
-const int CHAN     = kTAU;
+const int CHAN    = kTAU;
 // FakeFactor_2016_DeepTauIDv2_v0
 const TString analysis      ="2016_testing";
 const TString output_folder ="/ceph/jandrej/auto-fakefactors/2016_testing";
-const TString ver = "2016_testing"; // first time nanoAODv5 with deepTauIDv2 
+const TString ver = "2016"; // first time nanoAODv5 with deepTauIDv2 
 
 const TString _NtupleTreeName = "TauCheck"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
 const TString _NtupleTreeName_KIT = "tt_nominal/ntuple"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
@@ -20,7 +20,7 @@ const TString user="jandrej";
 const Double_t luminosity=35.87; //according to GOLDEN JSON see https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM    
 const TString ERA = "2016"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
-const int DEBUG=1; //set to 1 for additional output
+const int DEBUG=0; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
 ///////////////////////////////////////////////////
 //Out of date
@@ -71,7 +71,7 @@ const int fit_pT_bins = 1; //use fitted pT bins as input for ff
 // _VVTIGHT        128
 // A WP condition is met if: (Fulfill && !Fail)
 // settings for tight vs vloose&(!tight):
-const int wpTightFulfill = 32; 
+const int wpTightFulfill = 32;
 const int wpTightFail    = 0;
 const int wpLooseFulfill  = 4;
 const int wpLooseFail    = 32;
