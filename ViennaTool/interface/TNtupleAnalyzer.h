@@ -39,7 +39,7 @@ class TNtupleAnalyzer{
   int passes3LVeto, passesDLVeto, passesTauLepVetos, njets, nbtag;
   int nnn;
   double mjj,jdeta,njetingap20;
-  double mvamet; double met;
+  double met;
   double otherLep_pt,otherLep_eta,otherLep_phi,otherLep_m,otherLep_iso;
   int    otherLep_q;
   double lep_pt,lep_eta,lep_phi,lep_m,lep_iso;

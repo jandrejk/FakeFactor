@@ -1,6 +1,6 @@
 #!/bin/bash
 user=$USER
-fftype=2016
+fftype=32_4_2016_MSSM_v1
 
 
 line=" -------------------------------------------"
@@ -29,6 +29,7 @@ else
     mkdir -p /ceph/$user/auto-fakefactors/$fftype/preselection/tt
 fi
 mkdir -p /ceph/$user/auto-fakefactors/$fftype/preselection/mt
+
 
 if [ -d "sim" ]; then
     if [ ! -d "sim/mt" ]; then

@@ -187,7 +187,7 @@ void SRHisto() {
   Int_t nVARused = nVAR-1; //nVAR = 5 (Globals.h) no muiso is needed here
   
   const TString r1[nVARused]={"_pt","_mt","_mvis"}; //
-  const TString r2[nVARused]={ "_mt", "_mvis", "_pt"}; //"_mt2","_lepPt","_mvamet","_met","_eta", "_mttot","_mjj"};
+  const TString r2[nVARused]={ "_mt", "_mvis", "_pt"}; //"_mt2","_lepPt","_met","_eta", "_mttot","_mjj"};
   const TString discrim_var[nVAR] = {"_mt", "_mvis", "_pt","_eta"};
   Int_t n_discrim_var = 4;//sizeof(discrim_var) / sizeof(*discrim_var) -1;
 

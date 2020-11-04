@@ -101,7 +101,6 @@ const TString s_svfit        ="svfit";
 const TString s_muiso        ="muiso";
 const TString s_mt2          ="mt2";
 const TString s_lepPt        ="lepPt";
-const TString s_mvamet       ="mvamet";
 const TString s_met          ="met";
 const TString s_mjj          ="mjj";
 const TString s_mttot        ="mttot";
@@ -134,7 +133,7 @@ const TString path_img_mc        = path_img+"mc_"+s_chan[CHAN]+"/";
 const TString path_img_mc_woQCD  = path_img+"mc_woQCD_"+s_chan[CHAN]+"/";
 
 //Input directories
-const TString indir = "/ceph/jbechtel/fakefactors/"+ver+"/";
+const TString indir = "/ceph/jandrej/FFntuple/"+ver+"/";
 const TString datafile   = indir + s_chan[CHAN] + "-NOMINAL_ntuple_Data.root";
 const TString EMBfile    = indir + s_chan[CHAN] + "-NOMINAL_ntuple_EMB.root";
 const TString DY_NJfile  = indir + s_chan[CHAN] + "-NOMINAL_ntuple_DY.root";
