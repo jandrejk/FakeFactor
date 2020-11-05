@@ -174,6 +174,7 @@ void TNtupleAnalyzer::select(const TString preselectionFile, const Int_t mode)
   //Start loop over tree
   Double_t nentries = Double_t(event->fChain->GetEntries());
   Int_t pc=0; // count the number of events that passed the selection
+  Int_t pc2=0; // count the number of events that passed the selection
 
   cout<<"Producing " << preselFile << " , processing "<<Int_t(nentries)<<" events."<< endl;
   
@@ -199,17 +200,18 @@ void TNtupleAnalyzer::select(const TString preselectionFile, const Int_t mode)
     if (ntau>=1){ 
       if (DEBUG) { std::cout << "Event ID " << jentry << " passed preselection and is written to root file" << std::endl;}
       this->GetWeights(preselectionFile);
-      if (weight>0.0) { t_Events->Fill(); } 
-      pc++; 
+      if (weight>0.0) { t_Events->Fill(); pc++; } 
+       
     }
     if(CHAN==kTAU && !COINFLIP){
       ntau=0;
       ntau=setTreeValues(preselFile, mode, 2);
-      if(ntau>=1 && weight>0.0){ t_Events->Fill(); pc++; }
+      if(ntau>=1 && weight>0.0){ t_Events->Fill(); pc++; pc2++; }
     }
   }// End loop over all events
   if (DEBUG) {
   cout<<pc<<" events passed preselection."<< endl;
+  cout<<pc2<<" events passed preselection under the DC hypothesis."<< endl;
   cout<<nnn<<" events got skipped"<< endl;
   }
   t_Events->Write();
@@ -231,6 +233,7 @@ void TNtupleAnalyzer::SetNewEventInfo() {
   bpt_2=event->bpt_2;
   nbtag=event->nbtag;
   njets=event->njets;
+  njetspt20eta2p4=event->njetspt20eta2p4;
   mjj=event->mjj;
   met=event->met;
   jdeta=event->jdeta;
@@ -249,12 +252,15 @@ void TNtupleAnalyzer::SetNewEventInfo() {
   lep_phi=event->phi_1;
   lep_iso=event->iso_1;
   lep_q=event->q_1;
+  lepleg1_taujet_pt=event->taujet_pt_1;
+  lepleg2_taujet_pt=event->taujet_pt_2;
+
 
   otherLep_pt=-999;
   otherLep_eta=-999;
   otherLep_iso=-999;
   otherLep_q=-999;
-
+  
   m_otherLep->resize(0);
   m_otherLep_pt->resize(0);
   m_otherLep_eta->resize(0);
@@ -622,30 +628,22 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
       lep_eta=event->eta_2;
       lep_phi=event->phi_2;
       lep_q=event->q_2;
-      //lep_iso = ( (calcVTightFF==1 && event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_2==1) || (calcVTightFF==0 && event->byTightIsolationMVArun2017v2DBoldDMwLT2017_2==1) )  ? 10 : 0;
-      // lep_iso = (event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_2==0 && event->byTightIsolationMVArun2017v2DBoldDMwLT2017_2==1) ? 10 : 0;  //CHANGE IF TAU WP CHANGES! tight & !vtight
-      // lep_iso = event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_2==1 ? 10 : 0;  //CHANGE IF TAU WP CHANGES! vtight
-      
-      // 
-      lep_iso = event->byTightDeepTau2017v2p1VSjet_2==1 ? 10 : 0;  //CHANGE IF TAU WP CHANGES! tight
-      // lep_vloose = ( event->byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 == 1 ) ? 1 : 0;
-      // lep_loose = ( event->byLooseIsolationMVArun2017v2DBoldDMwLT2017_2 == 1 ) ? 1 : 0;
-      // lep_medium = ( event->byMediumIsolationMVArun2017v2DBoldDMwLT2017_2 == 1 ) ? 1 : 0;
+      lepleg1_taujet_pt=event->taujet_pt_2;
+      lepleg2_taujet_pt=event->taujet_pt_1;
 
+      lep_iso = event->byTightDeepTau2017v2p1VSjet_2==1 ? 10 : 0;  //CHANGE IF TAU WP CHANGES! tight
+      
     } else{
       lep_dR=-99; //needed for mZ in ee/mumu CR; not needed for tautau
       lep_pt=event->pt_1;
       lep_eta=event->eta_1;
       lep_phi=event->phi_1;
       lep_q=event->q_1;
-      // lep_iso = ( (calcVTightFF==1 && event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_1==1) || (calcVTightFF==0 && event->byTightIsolationMVArun2017v2DBoldDMwLT2017_1==1) )  ? 10 : 0;
-      // lep_iso = (event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_1==0 && event->byTightIsolationMVArun2017v2DBoldDMwLT2017_1==1) ? 10 : 0;  //CHANGE IF TAU WP CHANGES! tight & !vtight
-      // lep_iso = event->byVTightIsolationMVArun2017v2DBoldDMwLT2017_1==1 ? 10 : 0;  //CHANGE IF TAU WP CHANGES! vtight
+      lepleg1_taujet_pt=event->taujet_pt_1;
+      lepleg2_taujet_pt=event->taujet_pt_2;
+      
       lep_iso = event->byTightDeepTau2017v2p1VSjet_1==1 ? 10 : 0;  //CHANGE IF TAU WP CHANGES! tight
-      // lep_vloose = ( event->byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1 == 1 ) ? 1 : 0;
-      // lep_loose = ( event->byLooseIsolationMVArun2017v2DBoldDMwLT2017_1 == 1 ) ? 1 : 0;
-      // lep_medium = ( event->byMediumIsolationMVArun2017v2DBoldDMwLT2017_1 == 1 ) ? 1 : 0;
-
+      
     
 
     }
@@ -765,6 +763,7 @@ void TNtupleAnalyzer::initOutfileTree(TTree* tree)
   tree->Branch("bpt_1",&bpt_1);
   tree->Branch("bpt_2",&bpt_2);
   tree->Branch("njets",&njets);
+  tree->Branch("njetspt20eta2p4",&njetspt20eta2p4);
   tree->Branch("nbtag",&nbtag);
   tree->Branch("mjj",&mjj);
   tree->Branch("jdeta",&jdeta);
@@ -779,6 +778,8 @@ void TNtupleAnalyzer::initOutfileTree(TTree* tree)
   tree->Branch("otherLep_q"  ,&otherLep_q);
   tree->Branch("otherLep_iso",&otherLep_iso);
   tree->Branch("lep_pt" ,&lep_pt);	//TODO: TLorentzVector
+  tree->Branch("lepleg1_taujet_pt" ,&lepleg1_taujet_pt);	//TODO: TLorentzVector
+  tree->Branch("lepleg2_taujet_pt" ,&lepleg2_taujet_pt);	//TODO: TLorentzVector
   tree->Branch("lep_eta",&lep_eta);
   tree->Branch("lep_phi",&lep_phi);
   tree->Branch("lep_q"  ,&lep_q);

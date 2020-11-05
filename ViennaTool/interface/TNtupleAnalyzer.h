@@ -36,13 +36,13 @@ class TNtupleAnalyzer{
   // fields variables of SignalClass
   //    double mtll,mMuMu, dRMu, bpt_1, weight, sf, weight_sf, mu2_iso;//,mu1_eta, mu1_phi, mu2_eta, mu2_phi;
   double mt_leplep,m_leplep, lep_dR, bpt_1, bpt_2, mt_tot_puppi, weight, sf, weight_sf, mu2_iso;//,mu1_eta, mu1_phi, mu2_eta, mu2_phi;
-  int passes3LVeto, passesDLVeto, passesTauLepVetos, njets, nbtag;
+  int passes3LVeto, passesDLVeto, passesTauLepVetos, njets, nbtag, njetspt20eta2p4;
   int nnn;
   double mjj,jdeta,njetingap20;
   double met;
   double otherLep_pt,otherLep_eta,otherLep_phi,otherLep_m,otherLep_iso;
   int    otherLep_q;
-  double lep_pt,lep_eta,lep_phi,lep_m,lep_iso;
+  double lep_pt,lep_eta,lep_phi,lep_m,lep_iso, lepleg1_taujet_pt, lepleg2_taujet_pt;
   double lep_vvvloose,lep_vvloose,lep_vloose,lep_loose,lep_medium; // only needed for tt channel
   int    lep_q, lep_gen_match;
   int n_iso_lep, n_iso_otherLep;
