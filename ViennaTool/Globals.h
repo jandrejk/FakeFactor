@@ -533,19 +533,31 @@ const Int_t N_t_DY = sizeof(Decay_cuts_DY)/sizeof(Int_t);
 const Int_t N_t_TT = sizeof(Decay_cuts_TT)/sizeof(Int_t);
 const Int_t N_t_QCD = sizeof(Decay_cuts_QCD)/sizeof(Int_t);
 
-const Int_t Njet_cuts_Wjets[] = {0,1,2};
-const Int_t Njet_cuts_DY[] = {0,1};
+const Int_t Njet_cuts_Wjets[] = {0};
+const Int_t Njet_cuts_DY[] = {0};
 //const Int_t Njet_cuts_TT[] = {0};
-const Int_t Njet_cuts_TT_SR[] = {0,2};
-const Int_t Njet_cuts_TT_CR[] = {0,2};
-const Int_t Njet_cuts_QCD[] = {0,1,2};
+const Int_t Njet_cuts_TT_SR[] = {0};
+const Int_t Njet_cuts_TT_CR[] = {0};
+const Int_t Njet_cuts_QCD[] = {0};
 
 const Int_t N_j_Wjets = sizeof(Njet_cuts_Wjets)/sizeof(Int_t);
 const Int_t N_j_DY = sizeof(Njet_cuts_DY)/sizeof(Int_t);
 const Int_t N_j_TT_SR = sizeof(Njet_cuts_TT_SR)/sizeof(Int_t);
 const Int_t N_j_TT_CR = sizeof(Njet_cuts_TT_CR)/sizeof(Int_t);
-//const Int_t N_j_TT = sizeof(Njet_cuts_TT)/sizeof(Int_t);
 const Int_t N_j_QCD = sizeof(Njet_cuts_QCD)/sizeof(Int_t);
+
+//Number of pre bjets = n jets with pt>20 and eta< 2.4
+const Int_t Njetpt20eta2p4_cuts_Wjets[] = {0,1};
+const Int_t Njetpt20eta2p4_cuts_DY[] = {0,1};
+const Int_t Njetpt20eta2p4_cuts_TT_SR[] = {0};
+const Int_t Njetpt20eta2p4_cuts_TT_CR[] = {0};
+const Int_t Njetpt20eta2p4_cuts_QCD[] = {0,1};
+
+const Int_t N_jpt20eta2p4_Wjets = sizeof(Njetpt20eta2p4_cuts_Wjets)/sizeof(Int_t);
+const Int_t N_jpt20eta2p4_DY    = sizeof(Njetpt20eta2p4_cuts_DY)/sizeof(Int_t);
+const Int_t N_jpt20eta2p4_TT_SR = sizeof(Njetpt20eta2p4_cuts_TT_SR)/sizeof(Int_t);
+const Int_t N_jpt20eta2p4_TT_CR = sizeof(Njetpt20eta2p4_cuts_TT_CR)/sizeof(Int_t);
+const Int_t N_jpt20eta2p4_QCD   = sizeof(Njetpt20eta2p4_cuts_QCD)/sizeof(Int_t);
 
 //dR cuts 
 const Double_t dRTauLep_cuts_Wjets[] = {0,3.0};

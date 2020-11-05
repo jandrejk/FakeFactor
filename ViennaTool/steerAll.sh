@@ -66,7 +66,7 @@ done
 
 ./SRHisto &
 ./CRHisto &
-wait
+wait # SR and CR Histo are used for control plots in the different DRs which are later also used for non-closure and bias corrections
 
 ./steerFF
 ./fitFakeFactors

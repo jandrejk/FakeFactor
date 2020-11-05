@@ -16,12 +16,14 @@ FFCalculator::FFCalculator(
                            Int_t N_m_Wjets,Int_t N_m_DY,Int_t N_m_TT,Int_t N_m_QCD,
                            Int_t N_j_Wjets,Int_t N_j_DY,Int_t N_j_TT_SR,Int_t N_j_TT_CR,Int_t N_j_QCD,
                            Int_t N_dR_Wjets,Int_t N_dR_DY,Int_t N_dR_TT_SR,Int_t N_dR_TT_CR,Int_t N_dR_QCD,
+                           Int_t N_jpt20eta2p4_Wjets,Int_t N_jpt20eta2p4_DY,Int_t N_jpt20eta2p4_TT_SR,Int_t N_jpt20eta2p4_TT_CR,Int_t N_jpt20eta2p4_QCD,
                            const Double_t Pt_cuts_Wjets[],const Double_t Pt_cuts_DY[],const Double_t Pt_cuts_TT_SR[],const Double_t Pt_cuts_TT_CR[],const Double_t Pt_cuts_QCD[],const Double_t Pt_cuts_QCD_AI[],
                            const Double_t Eta_cuts_Wjets[],const Double_t Eta_cuts_DY[],const Double_t Eta_cuts_TT[],const Double_t Eta_cuts_QCD[],
                            const Int_t Decay_cuts_Wjets[],const Int_t Decay_cuts_DY[],const Int_t Decay_cuts_TT[],const Int_t Decay_cuts_QCD[],
                            const Double_t Mt_cuts_Wjets[],const Double_t Mt_cuts_DY[],const Double_t Mt_cuts_TT[],const Double_t Mt_cuts_QCD[],
                            const Int_t Njet_cuts_Wjets[],const Int_t Njet_cuts_DY[],const Int_t Njet_cuts_TT_SR[],const Int_t Njet_cuts_TT_CR[],const Int_t Njet_cuts_QCD[],
-                           const Double_t dRTauLep_cuts_Wjets[],const Double_t dRTauLep_cuts_DY[],const Double_t dRTauLep_cuts_TT_SR[],const Double_t dRTauLep_cuts_TT_CR[],const Double_t dRTauLep_cuts_QCD[]
+                           const Double_t dRTauLep_cuts_Wjets[],const Double_t dRTauLep_cuts_DY[],const Double_t dRTauLep_cuts_TT_SR[],const Double_t dRTauLep_cuts_TT_CR[],const Double_t dRTauLep_cuts_QCD[],
+                           const Int_t Njetpt20eta2p4_cuts_Wjets[],const Int_t Njetpt20eta2p4_cuts_DY[],const Int_t Njetpt20eta2p4_cuts_TT_SR[],const Int_t Njetpt20eta2p4_cuts_TT_CR[],const Int_t Njetpt20eta2p4_cuts_QCD[]
                            )
                            
 {
@@ -131,9 +133,8 @@ FFCalculator::FFCalculator(
   njet_cuts_QCD=(Int_t*)malloc(n_j_QCD*sizeof(Double_t));
   for(Int_t i=0;i<n_j_QCD;i++) njet_cuts_QCD[i]=Njet_cuts_QCD[i];
 
-
+  
   // dR categories 
-
   n_dR_Wjets=N_dR_Wjets;
   ndRTauLep_cuts_Wjets=(Double_t*)malloc(n_dR_Wjets*sizeof(Double_t));
   for(Int_t i=0;i<n_dR_Wjets;i++) ndRTauLep_cuts_Wjets[i]=dRTauLep_cuts_Wjets[i];
@@ -153,6 +154,28 @@ FFCalculator::FFCalculator(
   n_dR_QCD=N_dR_QCD;
   ndRTauLep_cuts_QCD=(Double_t*)malloc(n_dR_QCD*sizeof(Double_t));
   for(Int_t i=0;i<n_dR_QCD;i++) ndRTauLep_cuts_QCD[i]=dRTauLep_cuts_QCD[i];
+  // end dR categories
+
+  // Number of pre b-jet categorie
+  n_jpt20eta2p4_Wjets=N_jpt20eta2p4_Wjets;
+  njetpt20eta2p4_cuts_Wjets=(Int_t*)malloc(n_jpt20eta2p4_Wjets*sizeof(Double_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_Wjets;i++) njetpt20eta2p4_cuts_Wjets[i]=Njet_cuts_Wjets[i];
+
+  n_jpt20eta2p4_DY=N_jpt20eta2p4_DY;
+  njetpt20eta2p4_cuts_DY=(Int_t*)malloc(n_jpt20eta2p4_DY*sizeof(Double_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_DY;i++) njetpt20eta2p4_cuts_DY[i]=Njet_cuts_DY[i];
+
+  n_jpt20eta2p4_TT_SR=N_jpt20eta2p4_TT_SR;
+  njetpt20eta2p4_cuts_TT_SR=(Int_t*)malloc(n_jpt20eta2p4_TT_SR*sizeof(Double_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_TT_SR;i++) njetpt20eta2p4_cuts_TT_SR[i]=Njet_cuts_TT_SR[i];
+
+  n_jpt20eta2p4_TT_CR=N_jpt20eta2p4_TT_CR;
+  njetpt20eta2p4_cuts_TT_CR=(Int_t*)malloc(n_jpt20eta2p4_TT_CR*sizeof(Double_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_TT_CR;i++) njetpt20eta2p4_cuts_TT_CR[i]=Njet_cuts_TT_CR[i];
+
+  n_jpt20eta2p4_QCD=N_jpt20eta2p4_QCD;
+  njetpt20eta2p4_cuts_QCD=(Int_t*)malloc(n_jpt20eta2p4_QCD*sizeof(Double_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_QCD;i++) njetpt20eta2p4_cuts_QCD[i]=Njet_cuts_QCD[i];
 
 
 
@@ -931,8 +954,8 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
 
   int nT=0;
   int nL=0;
-  Double_t bin_values[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)][this->getNpts(mode)]={{0}}; //getNpts returns the tau pT binning 
-  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)][this->getNpts(mode)]={};
+  Double_t bin_values[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][this->getNpts(mode)]={{0}}; //getNpts returns the tau pT binning 
+  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][this->getNpts(mode)]={};
   
 
 
@@ -978,15 +1001,16 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
         Int_t njet_index=this->getNjetIndex(mode,tau_index);
         Int_t dR_index=this->getdRIndex(mode,tau_index);
         Int_t dm_index=this->getTrackIndex(mode,tau_index);
-
+        Int_t njetpt20eta2p4_index=this->getNjetpt20eta2p4Index(mode,tau_index);
+        
         // std::cout << "pT_index: " << pT_index << std::endl;
         // std::cout << "njet_index: " << njet_index << std::endl;
         // std::cout << "dR_index: " << dR_index << std::endl;
         // std::cout << "dm_index: " << dm_index << std::endl;
         
         
-        bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-        bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] += event_s->weight_sf;
+        bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
+        bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index] += event_s->weight_sf;
       }
     }
     else if(mode & _W_JETS) {
@@ -1074,13 +1098,14 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
           Int_t njet_index=this->getNjetIndex(mode,tau_index);
           Int_t dR_index=this->getdRIndex(mode,tau_index);
           Int_t dm_index=this->getTrackIndex(mode,tau_index);
-
-          bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-          bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] += event_s->weight_sf;
+          Int_t njetpt20eta2p4_index=this->getNjetpt20eta2p4Index(mode,tau_index);
+          
+          bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
+          bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index] += event_s->weight_sf;
   
 
-          bin_values[  dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] -=event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-          bin_counters[dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] -=event_s->weight_sf;
+          bin_values[  dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index] -=event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
+          bin_counters[dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index][pT_index] -=event_s->weight_sf;
         }
       }
       else if (mode & _W_JETS) {
@@ -1280,18 +1305,18 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
       for(Int_t ipt=0;ipt<this->getNpts(mode);ipt++){
         
         for(Int_t idR=0;idR<this->getdR(mode);idR++){
-          std::cout << "ijets: " << ijets << " idm: " << idm << " ipt: " << ipt << " idR: " << idR << std::endl;
+          for(Int_t ijetspt20eta2p4=0;ijetspt20eta2p4<this->getNjetspt20eta2p4(mode);ijetspt20eta2p4++){
+  
+          std::cout << "ijets: " << ijets << " idm: " << idm << " ipt: " << ipt << " idR: " << idR << "ijetspt20eta2p4: " << ijetspt20eta2p4 << std::endl;
           if (DEBUG){
-            cout << "Weighted: " << bin_values[ idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt] << endl;
-            cout << "Counted: " << bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt] << endl;
-            cout << "Ratio: " << bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt] << endl;
+            cout << "Weighted: " << bin_values[ idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt] << endl;
+            cout << "Counted: " << bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt] << endl;
+            cout << "Ratio: " << bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt] << endl;
           }
+ 
 
-          // bin_values[  dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] -=event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-          // bin_counters[dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index][pT_index] -=event_s->weight_sf;
-        
-
-          weighted_bin_center_loose->SetBinContent(ipt+this->getNpts(mode)*idm + (this->getNpts(mode)*this->getNtracks(mode))*ijets + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode))*idR + 1,bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)][ipt] ); 
+          weighted_bin_center_loose->SetBinContent(ipt+this->getNpts(mode)*idm + (this->getNpts(mode)*this->getNtracks(mode))*ijets + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode))*idR + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode)*this->getdR(mode))*ijetspt20eta2p4 + 1,bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)][ipt] ); 
+          }
         }
       }      
     }

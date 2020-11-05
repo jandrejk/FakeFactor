@@ -611,24 +611,27 @@ Int_t GlobalClass::getBin(const Int_t mode, const Int_t ind)
     //    if (mode & DRB){ cout << "X " << endl; cout << "X " << event_s->alltau_dRToB->size() << " " << ind << endl;  return this->getIndex(p_drb_v,p_drb_n+1,event_s->alltau_dRToB->at(ind) ); }
   }
 
-  Int_t i_p,i_t,i_e,i_m,i_j,i_dR;
-  Int_t n_p=-99,n_e=-99,n_t=-99,n_j=-99,n_dR=-99;
+  Int_t i_p,i_t,i_e,i_m,i_j,i_dR,i_jpt20eta2p4;
+  Int_t n_p=-99,n_e=-99,n_t=-99,n_j=-99,n_dR=-99,n_jpt20eta2p4=-99;
 
   i_p =getPtIndex(mode,ind);
   i_t =getTrackIndex(mode,ind);
   i_e =getEtaIndex(mode,ind);
   i_j =getNjetIndex(mode,ind);
   i_dR=getdRIndex(mode,ind);
+  i_jpt20eta2p4=getNjetpt20eta2p4Index(mode,ind);
 
-  if (mode & _W_JETS) {n_p=n_p_Wjets;n_e=n_e_Wjets;n_t=n_t_Wjets;n_j=n_j_Wjets;n_dR=n_dR_Wjets;}
-  else if ( (mode & _DY) ) {n_p=n_p_DY;n_e=n_e_DY;n_t=n_t_DY;n_j=n_j_DY;n_dR=n_dR_DY;}
-  else if ( (mode & _TT) && (mode & SR) )  {n_p=n_p_TT_SR;n_e=n_e_TT;n_t=n_t_TT;n_j=n_j_TT_SR;n_dR=n_dR_TT_SR;}
-  else if ( (mode & _TT) ) {n_p=n_p_TT_CR;n_e=n_e_TT;n_t=n_t_TT;n_j=n_j_TT_CR;n_dR=n_dR_TT_CR;}
+
+
+  if (mode & _W_JETS) {n_p=n_p_Wjets;n_e=n_e_Wjets;n_t=n_t_Wjets;n_j=n_j_Wjets;n_dR=n_dR_Wjets;n_jpt20eta2p4=n_jpt20eta2p4_Wjets;}
+  else if ( (mode & _DY) ) {n_p=n_p_DY;n_e=n_e_DY;n_t=n_t_DY;n_j=n_j_DY;n_dR=n_dR_DY;n_jpt20eta2p4=n_jpt20eta2p4_DY;}
+  else if ( (mode & _TT) && (mode & SR) )  {n_p=n_p_TT_SR;n_e=n_e_TT;n_t=n_t_TT;n_j=n_j_TT_SR;n_dR=n_dR_TT_SR;n_jpt20eta2p4=n_jpt20eta2p4_TT_SR;}
+  else if ( (mode & _TT) ) {n_p=n_p_TT_CR;n_e=n_e_TT;n_t=n_t_TT;n_j=n_j_TT_CR;n_dR=n_dR_TT_CR;n_jpt20eta2p4=n_jpt20eta2p4_TT_CR;}
   //else if ( (mode & _TT) ) {n_p=n_p_TT;n_e=n_e_TT;n_t=n_t_TT;n_j=n_j_TT;}
-  else if ( (mode & _QCD) && (mode & _AI) ) {n_p=n_p_QCD_AI;n_e=n_e_QCD;n_t=n_t_QCD;n_j=n_j_QCD;n_dR=n_dR_QCD;}
-  else if ( (mode & _QCD) )     {n_p=n_p_QCD;n_e=n_e_QCD;n_t=n_t_QCD;n_j=n_j_QCD;n_dR=n_dR_QCD;}
+  else if ( (mode & _QCD) && (mode & _AI) ) {n_p=n_p_QCD_AI;n_e=n_e_QCD;n_t=n_t_QCD;n_j=n_j_QCD;n_dR=n_dR_QCD;n_jpt20eta2p4=n_jpt20eta2p4_QCD;}
+  else if ( (mode & _QCD) )     {n_p=n_p_QCD;n_e=n_e_QCD;n_t=n_t_QCD;n_j=n_j_QCD;n_dR=n_dR_QCD;n_jpt20eta2p4=n_jpt20eta2p4_QCD;}
   else {cout<<"getBin: Define a valid MODE!"<<std::endl;n_p=-99;n_e=-99;n_t=-99;n_dR=-99;}
-  Int_t bin=i_e + i_p*n_e + i_t*n_p*n_e + i_j*n_t*n_p*n_e + i_dR*n_j*n_t*n_p*n_e;
+  Int_t bin=i_e + i_p*n_e + i_t*n_p*n_e + i_j*n_t*n_p*n_e + i_dR*n_j*n_t*n_p*n_e + i_jpt20eta2p4*n_dR*n_j*n_t*n_p*n_e;
   // std::cout<<i_e<<" "<<i_p<<" "<<i_t<<" "<<bin<<" "<<std::endl;
   // std::cout << bin << std::endl;
   return(bin);// combined index of track-pt-eta bin
@@ -649,9 +652,9 @@ Int_t GlobalClass::nBins(const Int_t mode)
     //    if (mode & MTLL ) return p_mt_n;
   }
 
-  if (mode & _W_JETS) return(n_e_Wjets*n_p_Wjets*n_t_Wjets*n_m_Wjets*n_j_Wjets*n_dR_Wjets);
-  else if ( (mode & _DY) ) return(n_e_DY*n_p_DY*n_t_DY*n_m_DY*n_j_DY*n_dR_DY);
-  else if ( (mode & _TT) && (mode & SR) ) return(n_e_TT*n_p_TT_SR*n_t_TT*n_m_TT*n_j_TT_SR*n_dR_TT_SR);
+  if (mode & _W_JETS) return(n_e_Wjets*n_p_Wjets*n_t_Wjets*n_m_Wjets*n_j_Wjets*n_dR_Wjets*n_jpt20eta2p4_Wjets);
+  else if ( (mode & _DY) ) return(n_e_DY*n_p_DY*n_t_DY*n_m_DY*n_j_DY*n_dR_DY*n_jpt20eta2p4_DY);
+  else if ( (mode & _TT) && (mode & SR) ) return(n_e_TT*n_p_TT_SR*n_t_TT*n_m_TT*n_j_TT_SR*n_dR_TT_SR*n_jpt20eta2p4_TT_SR);
   else if ( (mode & _TT) ) {
     // if (DEBUG) {
     //   std::cout << "Number of eta bins: " << n_e_TT << std::endl;
@@ -661,11 +664,11 @@ Int_t GlobalClass::nBins(const Int_t mode)
     //   std::cout << "Number of Njet bins: " << n_j_TT_CR << std::endl;
       
     // }
-    return(n_e_TT*n_p_TT_CR*n_t_TT*n_m_TT*n_j_TT_CR*n_dR_TT_CR);
+    return(n_e_TT*n_p_TT_CR*n_t_TT*n_m_TT*n_j_TT_CR*n_dR_TT_CR*n_jpt20eta2p4_TT_CR);
   }
   
-  else if ( (mode & _QCD) && (mode & _AI) ) return(n_e_QCD*n_p_QCD_AI*n_t_QCD*n_m_QCD*n_m_QCD*n_j_QCD*n_dR_QCD);
-  else if ( (mode & _QCD) )   return(n_e_QCD*n_p_QCD*n_t_QCD*n_m_QCD*n_m_QCD*n_j_QCD*n_dR_QCD);
+  else if ( (mode & _QCD) && (mode & _AI) ) return(n_e_QCD*n_p_QCD_AI*n_t_QCD*n_m_QCD*n_m_QCD*n_j_QCD*n_dR_QCD*n_jpt20eta2p4_QCD);
+  else if ( (mode & _QCD) )   return(n_e_QCD*n_p_QCD*n_t_QCD*n_m_QCD*n_m_QCD*n_j_QCD*n_dR_QCD*n_jpt20eta2p4_QCD);
 
   std::cout<<"nBins(mode): No valid mode."<<std::endl;
   return -99;
@@ -754,6 +757,30 @@ Int_t GlobalClass::getdRIndex(const Int_t mode, const Int_t ind)
   } else {cout<<"Define a valid mode!"<<std::endl;return(-99);}
 }
 
+Int_t GlobalClass::getNjetpt20eta2p4Index(const Int_t mode, const Int_t ind)
+{
+  // Binning in pt
+  Int_t i_jpt20eta2p4=0;
+  Double_t njetpt20eta2p4 = event_s->njetspt20eta2p4;
+  
+  if (mode & _W_JETS) {
+    for(Int_t i=0;i<n_jpt20eta2p4_Wjets;i++) if (njetpt20eta2p4>=njetpt20eta2p4_cuts_Wjets[i]) i_jpt20eta2p4++;
+    return(--i_jpt20eta2p4);
+  } else if ( (mode & _DY) ) {
+    for(Int_t i=0;i<n_jpt20eta2p4_DY;i++) if (njetpt20eta2p4>=njetpt20eta2p4_cuts_DY[i]) i_jpt20eta2p4++;
+    return(--i_jpt20eta2p4);
+  } else if ( (mode & _TT) && (mode & SR) ) {
+    for(Int_t i=0;i<n_jpt20eta2p4_TT_SR;i++) if (njetpt20eta2p4>=njetpt20eta2p4_cuts_TT_SR[i]) i_jpt20eta2p4++;
+    return(--i_jpt20eta2p4);
+  } else if ( (mode & _TT) ) {
+    for(Int_t i=0;i<n_jpt20eta2p4_TT_CR;i++) if (njetpt20eta2p4>=njetpt20eta2p4_cuts_TT_CR[i]) i_jpt20eta2p4++;
+    return(--i_jpt20eta2p4);
+  } else if ( (mode & _QCD) ) {
+    for(Int_t i=0;i<n_jpt20eta2p4_QCD;i++) if (njetpt20eta2p4>=njetpt20eta2p4_cuts_QCD[i]) i_jpt20eta2p4++;
+    return(--i_jpt20eta2p4);
+  } else {cout<<"Define a valid mode!"<<std::endl;return(-99);}
+}
+
 Int_t GlobalClass::getNjets(const Int_t mode, const Int_t ind)
 {
   if(mode & _W_JETS) return N_j_Wjets;
@@ -770,6 +797,16 @@ Int_t GlobalClass::getdR(const Int_t mode, const Int_t ind)
   else if(mode & _DY) return N_dR_DY;
   else if(mode & _TT && mode & SR) return N_dR_TT_SR;
   else if(mode & _TT) return N_dR_TT_CR;
+  else {cout<<"Define a valid mode!"<<std::endl;return(-99);}
+}
+
+Int_t GlobalClass::getNjetspt20eta2p4(const Int_t mode, const Int_t ind)
+{
+  if(mode & _W_JETS) return N_jpt20eta2p4_Wjets;
+  else if(mode & _QCD) return N_jpt20eta2p4_QCD;
+  else if(mode & _DY) return N_jpt20eta2p4_DY;
+  else if(mode & _TT && mode & SR) return N_jpt20eta2p4_TT_SR;
+  else if(mode & _TT) return N_jpt20eta2p4_TT_CR;
   else {cout<<"Define a valid mode!"<<std::endl;return(-99);}
 }
 
