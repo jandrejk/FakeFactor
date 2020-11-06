@@ -10,7 +10,7 @@
 using namespace std;
 
 
-CustomFit SetCustomFit(CustomFit cf, Int_t mode_i, Int_t idm, Int_t ijet, Int_t idR, Int_t ijetpt20eta2p4) {
+CustomFit SetCustomFit(CustomFit cf, Int_t mode_i, Int_t idm, Int_t ijet, Int_t idR, Int_t ijetpt20eta2p4, Int_t ipTratio) {
 
   if (CHAN == kMU && mode_i & _W_JETS && ijet == 0) {
     cf.set_fitFunc( "pol1(0)" );
@@ -162,6 +162,7 @@ void fitFakeFactors(){
   vector<Int_t> jet_bins; jet_bins.push_back(N_j_QCD); jet_bins.push_back(N_j_QCD); if(CHAN!=kTAU){jet_bins.push_back(N_j_Wjets); jet_bins.push_back(N_j_Wjets); jet_bins.push_back(N_j_TT_SR);}
   vector<Int_t> dR_bins; dR_bins.push_back(N_dR_QCD); dR_bins.push_back(N_dR_QCD); if(CHAN!=kTAU){dR_bins.push_back(N_dR_Wjets); dR_bins.push_back(N_dR_Wjets); dR_bins.push_back(N_dR_TT_SR);}
   vector<Int_t> jetpt20eta2p4_bins; jetpt20eta2p4_bins.push_back(N_jpt20eta2p4_QCD); jetpt20eta2p4_bins.push_back(N_jpt20eta2p4_QCD); if(CHAN!=kTAU){jetpt20eta2p4_bins.push_back(N_jpt20eta2p4_Wjets); jetpt20eta2p4_bins.push_back(N_jpt20eta2p4_Wjets); jetpt20eta2p4_bins.push_back(N_jpt20eta2p4_TT_SR);}
+  vector<Int_t> pTratio_bins; pTratio_bins.push_back(N_pTratio_QCD); pTratio_bins.push_back(N_pTratio_QCD); if(CHAN!=kTAU){pTratio_bins.push_back(N_pTratio_Wjets); pTratio_bins.push_back(N_pTratio_Wjets); pTratio_bins.push_back(N_pTratio_TT_SR);}
   vector<Int_t> pt_bins; pt_bins.push_back(N_p_QCD); pt_bins.push_back(N_p_QCD_AI); if(CHAN!=kTAU){pt_bins.push_back(N_p_Wjets); pt_bins.push_back(N_p_Wjets); pt_bins.push_back(N_p_TT_SR);}
 
 
@@ -177,7 +178,8 @@ void fitFakeFactors(){
       for(Int_t ijet=0; ijet<jet_bins.at(imode); ijet++){ // loop over jet categories
         for(Int_t idR=0; idR<dR_bins.at(imode); idR++){ // loop over dR categories
           for(Int_t ijetpt20eta2p4=0; ijetpt20eta2p4<jetpt20eta2p4_bins.at(imode); ijetpt20eta2p4++){ // loop over jet with pt20eta2p4 categories
-
+            for(Int_t ipTratio=0; ipTratio<pTratio_bins.at(imode); ipTratio++){ // loop over pTratio categories
+        
             CustomFit cf;
             TString histname = "c_t";
             if(i_uncmode==1) {
@@ -200,15 +202,16 @@ void fitFakeFactors(){
             else if(modes.at(imode) & _W_JETS) for(int ibin=0; ibin<nbins; ibin++){a_bins[ibin]=Pt_cuts_Wjets[ibin];}
             else if(modes.at(imode) & _TT) for(int ibin=0; ibin<nbins; ibin++){a_bins[ibin]=Pt_cuts_TT_SR[ibin];}
             
-            cf = SetCustomFit(cf, modes.at(imode), idm, ijet, idR, ijetpt20eta2p4); // settings for the fit are set (e.g. use a linear fit)
+            cf = SetCustomFit(cf, modes.at(imode), idm, ijet, idR, ijetpt20eta2p4, ipTratio); // settings for the fit are set (e.g. use a linear fit)
     
-            Int_t cat = idm + dm_bins.at(imode)*ijet + dm_bins.at(imode)*jet_bins.at(imode)*idR + dm_bins.at(imode)*jet_bins.at(imode)*dR_bins.at(imode)*ijetpt20eta2p4; // category = DecayMode + N_decayModes * JetCategoryBin
+            Int_t cat = idm + dm_bins.at(imode)*ijet + dm_bins.at(imode)*jet_bins.at(imode)*idR + dm_bins.at(imode)*jet_bins.at(imode)*dR_bins.at(imode)*ijetpt20eta2p4 + dm_bins.at(imode)*jet_bins.at(imode)*dR_bins.at(imode)*jetpt20eta2p4_bins.at(imode)*ipTratio; // category = DecayMode + N_decayModes * JetCategoryBin
 
             std::cout << "idm: " << idm << std::endl;
             std::cout << "dm_bins.at(imode): " << dm_bins.at(imode) << std::endl;
             std::cout << "ijet: " << ijet << std::endl;
             std::cout << "idR: " << idR << std::endl;
             std::cout << "ijetpt20eta2p4: " << ijetpt20eta2p4 << std::endl;
+            std::cout << "ipTratio: " << ipTratio << std::endl;
             std::cout << "cat: " << cat << std::endl;
             std::cout << "no of pt bins: " << nbins << std::endl;
             
@@ -419,12 +422,29 @@ void fitFakeFactors(){
             }
           }
 
+          TString pTratioMode="incl";
+          
+          if(ipTratio == 0) {
+            
+            pTratioMode = "< 1.25";
+            // std::cout << pTratioMode << std::endl;
+            // exit(0);
+          }
+          else if (ipTratio == 1) {
+            pTratioMode = "#in [1.25,1.5)";
+          }
+          else {
+            pTratioMode = "#geq 1.5";
+          }
+          
+
           TString channel=""; { if(CHAN == kMU) channel+="#mu^{}#tau_{h}"; else if(CHAN == kEL) channel+="e#tau_{h}"; else channel+="#tau_{h}#tau_{h}";}
           
           ChannelJetcat.DrawLatex(0.16,0.985,"channel: "+channel);
-          ChannelJetcat.DrawLatex(0.16,0.950,"N_{jet} category: "+jetMode);
-          ChannelJetcat.DrawLatex(0.16,0.915,"dR(tau,lepton) "+dRMode);
-          ChannelJetcat.DrawLatex(0.35,0.985,"N_{pre-b-jet} category: "+jetpt20eta2p4Mode);
+          // ChannelJetcat.DrawLatex(0.16,0.950,"N_{jet} category: "+jetMode);
+          // ChannelJetcat.DrawLatex(0.16,0.915,"dR(tau,lepton) "+dRMode);
+          ChannelJetcat.DrawLatex(0.16,0.950,"N_{pre-b-jet} cat.: "+jetpt20eta2p4Mode);
+          ChannelJetcat.DrawLatex(0.16,0.915,"p_{T,seed} / p_{T,reco} cat.: "+pTratioMode);
           
           
           TLatex cms1 = TLatex( 0.19, 0.838, "CMS" );
@@ -477,16 +497,16 @@ void fitFakeFactors(){
           if( modes.at(imode) & _QCD && ff_fitted_name.Contains("AI") ) ending += "AI_";
           if( modes.at(imode) & _W_JETS && ff_fitted_name.Contains("_MC_") ) ending += "MC_";
           if(i_uncmode==0) {
-          convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4;
-          f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4;
+          convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio;
+          f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio;
           }
           else if(i_uncmode==1) {
-            convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_mcup";
-            f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_mcup";   
+            convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio << "_mcup";
+            f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio << "_mcup";   
             }
           else if(i_uncmode==2) {
-            convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_mcdown";
-            f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_mcdown";   
+            convert << "dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio << "_mcdown";
+            f_convert << "f_dm" << idm << "_" << "njet" << ijet << "_" << "dR" << idR << "_" << "nprebjet" << ijetpt20eta2p4 << "_" << "pTratio" << ipTratio << "_mcdown";   
             }
           stringstream convertChannel;
           if(CHAN==kMU) convertChannel<<"_mt"; if(CHAN==kEL) convertChannel<<"_et"; if(CHAN==kTAU) convertChannel<<"_tt"; 
@@ -527,6 +547,7 @@ void fitFakeFactors(){
           delete c2;
 
           // break;
+          }
           }
         }
       }

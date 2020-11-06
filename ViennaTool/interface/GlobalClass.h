@@ -54,6 +54,7 @@ class GlobalClass{
   Int_t getPtIndex(const Int_t mode, const Int_t ind=0);
   Int_t getNjetIndex(const Int_t mode, const Int_t ind=0);
   Int_t getdRIndex(const Int_t mode, const Int_t ind=0);
+  Int_t getpTratioIndex(const Int_t mode, const Int_t ind=0);
   Int_t getNjetpt20eta2p4Index(const Int_t mode, const Int_t ind=0);
   Int_t getEtaIndex(const Int_t mode, const Int_t ind=0);
   Int_t getMtIndex(const Int_t mode, const Int_t ind=0);
@@ -68,6 +69,7 @@ class GlobalClass{
   Int_t getNjets(const Int_t mode, const Int_t ind=0);
   Int_t getdR(const Int_t mode, const Int_t ind=0);
   Int_t getNjetspt20eta2p4(const Int_t mode, const Int_t ind=0);
+  Int_t getpTratio(const Int_t mode, const Int_t ind=0);
   
   
   
@@ -75,6 +77,8 @@ class GlobalClass{
   TString curr_sample;
   SignalClass *event_s;
   TChain* tchain;
+
+
 
   // variables used in whole class
   //Double_t* pt_cuts_Wjets,*pt_cuts_DY,*pt_cuts_TT,*pt_cuts_QCD,*pt_cuts_QCD_AI;
@@ -85,6 +89,8 @@ class GlobalClass{
   Int_t* njet_cuts_Wjets,*njet_cuts_DY,*njet_cuts_TT_SR,*njet_cuts_TT_CR,*njet_cuts_QCD;
   Double_t* ndRTauLep_cuts_Wjets,*ndRTauLep_cuts_DY,*ndRTauLep_cuts_TT_SR,*ndRTauLep_cuts_TT_CR,*ndRTauLep_cuts_QCD;
   Int_t* njetpt20eta2p4_cuts_Wjets,*njetpt20eta2p4_cuts_DY,*njetpt20eta2p4_cuts_TT_SR,*njetpt20eta2p4_cuts_TT_CR,*njetpt20eta2p4_cuts_QCD;
+  Double_t* npTratio_cuts_Wjets,*npTratio_cuts_DY,*npTratio_cuts_TT_SR,*npTratio_cuts_TT_CR,*npTratio_cuts_QCD;
+  
   //Int_t* njet_cuts_Wjets,*njet_cuts_DY,*njet_cuts_TT,*njet_cuts_QCD;
   //Int_t n_p_Wjets,n_p_DY,n_p_TT,n_p_QCD,n_p_QCD_AI;
   Int_t n_p_Wjets,n_p_DY,n_p_TT_SR,n_p_TT_CR,n_p_QCD,n_p_QCD_AI;
@@ -95,6 +101,7 @@ class GlobalClass{
   Int_t n_j_Wjets,n_j_DY,n_j_TT_SR,n_j_TT_CR,n_j_QCD;
   Int_t n_dR_Wjets,n_dR_DY,n_dR_TT_SR,n_dR_TT_CR,n_dR_QCD;
   Int_t n_jpt20eta2p4_Wjets,n_jpt20eta2p4_DY,n_jpt20eta2p4_TT_SR,n_jpt20eta2p4_TT_CR,n_jpt20eta2p4_QCD;
+  Int_t n_pTratio_Wjets,n_pTratio_DY,n_pTratio_TT_SR,n_pTratio_TT_CR,n_pTratio_QCD;
   
 
   //use for mtll correction

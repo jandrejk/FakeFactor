@@ -282,6 +282,7 @@ void TNtupleAnalyzer::SetNewEventInfo() {
 
 void TNtupleAnalyzer::ResizeVectors() {
   alltau_pt->resize(0);
+  alltaujet_pt->resize(0);
   alltau_eta->resize(0);
   alltau_phi->resize(0);
   alltau_q->resize(0);
@@ -500,6 +501,7 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
     Int_t tpos=0;
     tau_iso_ind=tpos;
     alltau_pt->insert(alltau_pt->begin()+tpos,event->pt_2);
+    alltaujet_pt->insert(alltaujet_pt->begin()+tpos,event->taujet_pt_2);
     alltau_eta->insert(alltau_eta->begin()+tpos,event->eta_2);
     alltau_phi->insert(alltau_phi->begin()+tpos,event->phi_2);
     
@@ -567,6 +569,7 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
       Int_t tpos=0;
       tau_iso_ind=tpos;    
       alltau_pt->insert(alltau_pt->begin()+tpos,event->pt_1);
+      alltaujet_pt->insert(alltaujet_pt->begin()+tpos,event->taujet_pt_1);
       alltau_eta->insert(alltau_eta->begin()+tpos,event->eta_1);
       alltau_phi->insert(alltau_phi->begin()+tpos,event->phi_1);
       alltau_q->insert(alltau_q->begin()+tpos,event->q_1);
@@ -792,6 +795,7 @@ void TNtupleAnalyzer::initOutfileTree(TTree* tree)
   tree->Branch("n_iso_lep",&n_iso_lep);
   tree->Branch("n_iso_otherLep",&n_iso_otherLep);
   tree->Branch("alltau_pt",&alltau_pt);
+  tree->Branch("alltaujet_pt",&alltaujet_pt);
   tree->Branch("alltau_eta",&alltau_eta);
   tree->Branch("alltau_phi",&alltau_phi);
   tree->Branch("alltau_q",&alltau_q);
@@ -822,6 +826,7 @@ void TNtupleAnalyzer::initOutfileTree(TTree* tree)
   tree->Branch("tau_iso_ind",&tau_iso_ind);
 
   alltau_pt=new vector<Double_t>;
+  alltaujet_pt=new vector<Double_t>;
   alltau_eta=new vector<Double_t>;
   alltau_phi=new vector<Double_t>;
   alltau_q=new vector<Double_t>;

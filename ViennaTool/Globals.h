@@ -572,6 +572,21 @@ const Int_t N_dR_TT_SR = sizeof(dRTauLep_cuts_TT_SR)/sizeof(Double_t);
 const Int_t N_dR_TT_CR = sizeof(dRTauLep_cuts_TT_CR)/sizeof(Double_t);
 const Int_t N_dR_QCD = sizeof(dRTauLep_cuts_QCD)/sizeof(Double_t);
 
+//cut in categories of seeding tau pT / reco tau pT
+const Double_t pTratio_cuts_Wjets[] = {0,1.25,1.5};
+const Double_t pTratio_cuts_DY[]    = {0,1.25,1.5};
+const Double_t pTratio_cuts_TT_SR[] = {0,1.25,1.5};
+const Double_t pTratio_cuts_TT_CR[] = {0,1.25,1.5};
+const Double_t pTratio_cuts_QCD[]   = {0,1.25,1.5};
+
+
+const Int_t N_pTratio_Wjets = sizeof(pTratio_cuts_Wjets)/sizeof(Double_t);
+const Int_t N_pTratio_DY    = sizeof(pTratio_cuts_DY)/sizeof(Double_t);
+const Int_t N_pTratio_TT_SR = sizeof(pTratio_cuts_TT_SR)/sizeof(Double_t);
+const Int_t N_pTratio_TT_CR = sizeof(pTratio_cuts_TT_CR)/sizeof(Double_t);
+const Int_t N_pTratio_QCD   = sizeof(pTratio_cuts_QCD)/sizeof(Double_t);
+
+
 const Int_t nbins_svfit=35;  const Double_t hist_min_svfit=0.;  const Double_t hist_max_svfit=350.;
 const Int_t nbins_lepPt=20;  const Double_t hist_min_lepPt=20.; const Double_t hist_max_lepPt=120.;
 const Int_t nbins_mt=25;     const Double_t hist_min_mt=0.;     const Double_t hist_max_mt=250.;

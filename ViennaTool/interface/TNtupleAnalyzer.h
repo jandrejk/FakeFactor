@@ -66,6 +66,7 @@ class TNtupleAnalyzer{
   std::vector<Int_t>    *m_lep_q;
 
   std::vector<Double_t> *alltau_pt;
+  std::vector<Double_t> *alltaujet_pt;
   std::vector<Double_t> *alltau_eta;
   std::vector<Double_t> *alltau_phi;
   std::vector<Double_t> *alltau_q;
