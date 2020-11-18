@@ -560,7 +560,7 @@ const Int_t N_jpt20eta2p4_TT_CR = sizeof(Njetpt20eta2p4_cuts_TT_CR)/sizeof(Int_t
 const Int_t N_jpt20eta2p4_QCD   = sizeof(Njetpt20eta2p4_cuts_QCD)/sizeof(Int_t);
 
 //dR cuts 
-const Double_t dRTauLep_cuts_Wjets[] = {0,3.0};
+const Double_t dRTauLep_cuts_Wjets[] = {0};
 const Double_t dRTauLep_cuts_DY[] = {0};
 const Double_t dRTauLep_cuts_TT_SR[] = {0};
 const Double_t dRTauLep_cuts_TT_CR[] = {0};
