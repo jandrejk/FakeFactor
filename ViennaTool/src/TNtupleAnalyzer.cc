@@ -320,6 +320,15 @@ Int_t TNtupleAnalyzer::setTreeValues(const TString preselectionFile, const Int_t
     are applied in the following lines
   */
 
+  if (CHAN != kTAU && event->taujet_pt_2 < 0) {
+    std::cout << "Found a bad guy" << std::endl;
+    return 0;
+  }
+  if (CHAN == kTAU && (event->taujet_pt_2 < 0 || event->taujet_pt_1 < 0) ) return 0;
+  
+  if (DEBUG) {std::cout << "event " << evt_ID << " has no negative seeding tau pT" << std::endl;}
+  
+
   if(CHAN==kMU &&  ((event->flagMETFilter <0.5) || !((event->trg_singlemuon > 0.5) || (event->pt_1<23 && event->trg_mutaucross>0.5)))) return 0; 
   if(CHAN==kTAU && ((event->flagMETFilter <0.5) || !( (event->trg_doubletau>0.5) && (event->pt_1>40) && (event->pt_2>40)) )) return 0;
   if(CHAN==kEL &&  ((event->flagMETFilter <0.5) || !(((event->trg_singleelectron > 0.5) && (event->pt_1>26) && (event->pt_2>30)))))  return 0;

@@ -112,27 +112,27 @@ FFCalculator::FFCalculator(
 
   // Njet categories 
   n_j_Wjets=N_j_Wjets;
-  njet_cuts_Wjets=(Int_t*)malloc(n_j_Wjets*sizeof(Double_t));
+  njet_cuts_Wjets=(Int_t*)malloc(n_j_Wjets*sizeof(Int_t));
   for(Int_t i=0;i<n_j_Wjets;i++) njet_cuts_Wjets[i]=Njet_cuts_Wjets[i];
 
   n_j_DY=N_j_DY;
-  njet_cuts_DY=(Int_t*)malloc(n_j_DY*sizeof(Double_t));
+  njet_cuts_DY=(Int_t*)malloc(n_j_DY*sizeof(Int_t));
   for(Int_t i=0;i<n_j_DY;i++) njet_cuts_DY[i]=Njet_cuts_DY[i];
 
   //n_j_TT=N_j_TT;
-  //njet_cuts_TT=(Int_t*)malloc(n_j_TT*sizeof(Double_t));
+  //njet_cuts_TT=(Int_t*)malloc(n_j_TT*sizeof(Int_t));
   //for(Int_t i=0;i<n_j_TT;i++) njet_cuts_TT[i]=Njet_cuts_TT[i];
 
   n_j_TT_SR=N_j_TT_SR;
-  njet_cuts_TT_SR=(Int_t*)malloc(n_j_TT_SR*sizeof(Double_t));
+  njet_cuts_TT_SR=(Int_t*)malloc(n_j_TT_SR*sizeof(Int_t));
   for(Int_t i=0;i<n_j_TT_SR;i++) njet_cuts_TT_SR[i]=Njet_cuts_TT_SR[i];
 
   n_j_TT_CR=N_j_TT_CR;
-  njet_cuts_TT_CR=(Int_t*)malloc(n_j_TT_CR*sizeof(Double_t));
+  njet_cuts_TT_CR=(Int_t*)malloc(n_j_TT_CR*sizeof(Int_t));
   for(Int_t i=0;i<n_j_TT_CR;i++) njet_cuts_TT_CR[i]=Njet_cuts_TT_CR[i];
 
   n_j_QCD=N_j_QCD;
-  njet_cuts_QCD=(Int_t*)malloc(n_j_QCD*sizeof(Double_t));
+  njet_cuts_QCD=(Int_t*)malloc(n_j_QCD*sizeof(Int_t));
   for(Int_t i=0;i<n_j_QCD;i++) njet_cuts_QCD[i]=Njet_cuts_QCD[i];
 
   
@@ -160,24 +160,24 @@ FFCalculator::FFCalculator(
 
   // Number of pre b-jet categories
   n_jpt20eta2p4_Wjets=N_jpt20eta2p4_Wjets;
-  njetpt20eta2p4_cuts_Wjets=(Int_t*)malloc(n_jpt20eta2p4_Wjets*sizeof(Double_t));
-  for(Int_t i=0;i<n_jpt20eta2p4_Wjets;i++) njetpt20eta2p4_cuts_Wjets[i]=Njet_cuts_Wjets[i];
+  njetpt20eta2p4_cuts_Wjets=(Int_t*)malloc(n_jpt20eta2p4_Wjets*sizeof(Int_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_Wjets;i++) njetpt20eta2p4_cuts_Wjets[i]=Njetpt20eta2p4_cuts_Wjets[i];
 
   n_jpt20eta2p4_DY=N_jpt20eta2p4_DY;
-  njetpt20eta2p4_cuts_DY=(Int_t*)malloc(n_jpt20eta2p4_DY*sizeof(Double_t));
-  for(Int_t i=0;i<n_jpt20eta2p4_DY;i++) njetpt20eta2p4_cuts_DY[i]=Njet_cuts_DY[i];
+  njetpt20eta2p4_cuts_DY=(Int_t*)malloc(n_jpt20eta2p4_DY*sizeof(Int_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_DY;i++) njetpt20eta2p4_cuts_DY[i]=Njetpt20eta2p4_cuts_DY[i];
 
   n_jpt20eta2p4_TT_SR=N_jpt20eta2p4_TT_SR;
-  njetpt20eta2p4_cuts_TT_SR=(Int_t*)malloc(n_jpt20eta2p4_TT_SR*sizeof(Double_t));
-  for(Int_t i=0;i<n_jpt20eta2p4_TT_SR;i++) njetpt20eta2p4_cuts_TT_SR[i]=Njet_cuts_TT_SR[i];
+  njetpt20eta2p4_cuts_TT_SR=(Int_t*)malloc(n_jpt20eta2p4_TT_SR*sizeof(Int_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_TT_SR;i++) njetpt20eta2p4_cuts_TT_SR[i]=Njetpt20eta2p4_cuts_TT_SR[i];
 
   n_jpt20eta2p4_TT_CR=N_jpt20eta2p4_TT_CR;
-  njetpt20eta2p4_cuts_TT_CR=(Int_t*)malloc(n_jpt20eta2p4_TT_CR*sizeof(Double_t));
-  for(Int_t i=0;i<n_jpt20eta2p4_TT_CR;i++) njetpt20eta2p4_cuts_TT_CR[i]=Njet_cuts_TT_CR[i];
+  njetpt20eta2p4_cuts_TT_CR=(Int_t*)malloc(n_jpt20eta2p4_TT_CR*sizeof(Int_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_TT_CR;i++) njetpt20eta2p4_cuts_TT_CR[i]=Njetpt20eta2p4_cuts_TT_CR[i];
 
   n_jpt20eta2p4_QCD=N_jpt20eta2p4_QCD;
-  njetpt20eta2p4_cuts_QCD=(Int_t*)malloc(n_jpt20eta2p4_QCD*sizeof(Double_t));
-  for(Int_t i=0;i<n_jpt20eta2p4_QCD;i++) njetpt20eta2p4_cuts_QCD[i]=Njet_cuts_QCD[i];
+  njetpt20eta2p4_cuts_QCD=(Int_t*)malloc(n_jpt20eta2p4_QCD*sizeof(Int_t));
+  for(Int_t i=0;i<n_jpt20eta2p4_QCD;i++) njetpt20eta2p4_cuts_QCD[i]=Njetpt20eta2p4_cuts_QCD[i];
   // end Number of pre b-jet categories
 
   // pTratio categories 
@@ -978,11 +978,11 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
   int nT=0;
   int nL=0;
   Double_t bin_values[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={{0}}; //getNpts returns the tau pT binning 
-  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={};
+  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={{0}};
+  
+  
   
 
-
-  
 
   loadFile(pre_main,"Events");
   
@@ -1011,6 +1011,13 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
       nT=this->isTight(mode,tau_index); 
       nL=this->isLoose(mode,tau_index); 
       
+      // catch negative taujet_pt values
+      if (this->getpTratioIndex(mode,tau_index) < 0) {
+        std::cout << "this should not be done" << std::endl;
+        exit(0);
+        continue;
+      }
+
       if (nT) {
         ccc_t++;
         counter_histo_tight_CR->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
@@ -1034,25 +1041,25 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
         
         
         bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-        bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index] += event_s->weight_sf;
+        bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index]   += event_s->weight_sf;
       }
-    }
+    } 
     else if(mode & _W_JETS) {
-    if (this->isInCR(_SS,tau_index) )  {
-      nT=this->isTight(mode,tau_index); 
-      nL=this->isLoose(mode,tau_index); 
-      
-      if (nT) {
-        // ccc_t++;
-        // std::cout << "bin index: " << this->getBin(mode,tau_index) << std::endl;
-        counter_histo_tight_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
-      }
-      else if (nL) {
-        // ccc_l++;
-        counter_histo_loose_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
+      if (this->isInCR(_SS,tau_index) )  {
+        nT=this->isTight(mode,tau_index); 
+        nL=this->isLoose(mode,tau_index); 
+        
+        if (nT) {
+          // ccc_t++;
+          // std::cout << "bin index: " << this->getBin(mode,tau_index) << std::endl;
+          counter_histo_tight_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
+        }
+        else if (nL) {
+          // ccc_l++;
+          counter_histo_loose_CR_SS->Fill(    this->getBin(mode,tau_index),event_s->weight_sf);
 
-      }
-    }    
+        }
+      }    
     }
   } //end loop over entries
 
@@ -1125,10 +1132,10 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
           Int_t njetpt20eta2p4_index=this->getNjetpt20eta2p4Index(mode,tau_index);
           Int_t pTratio_index=this->getpTratioIndex(mode,tau_index);
           
-          bin_values[  dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
-          bin_counters[dm_index+this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index] += event_s->weight_sf;
-  
+          bin_values[  dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index]   += event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
+          bin_counters[dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index] += event_s->weight_sf;
 
+          
           bin_values[  dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index] -=event_s->alltau_pt->at(tau_index)*event_s->weight_sf;
           bin_counters[dm_index + this->getNtracks(mode)*njet_index + this->getNtracks(mode)*this->getNjets(mode)*dR_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*njetpt20eta2p4_index + this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*pTratio_index][pT_index] -=event_s->weight_sf;
         }
@@ -1333,15 +1340,15 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
           for(Int_t ijetspt20eta2p4=0;ijetspt20eta2p4<this->getNjetspt20eta2p4(mode);ijetspt20eta2p4++){
             for(Int_t ipTratio=0;ipTratio<this->getpTratio(mode);ipTratio++){
         
-          std::cout << "ijets: " << ijets << " idm: " << idm << " ipt: " << ipt << " idR: " << idR << "ijetspt20eta2p4: " << ijetspt20eta2p4 << " ipTratio: " << ipTratio<< std::endl;
+          std::cout << "ijets: " << ijets << " idm: " << idm << " ipt: " << ipt << " idR: " << idR << " ijetspt20eta2p4: " << ijetspt20eta2p4 << " ipTratio: " << ipTratio<< std::endl;
           if (DEBUG){
-            cout << "Weighted: " << bin_values[ idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] << endl;
+            cout << "Weighted: " << bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] << endl;
             cout << "Counted: " << bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] << endl;
             cout << "Ratio: " << bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] << endl;
           }
  
 
-          weighted_bin_center_loose->SetBinContent(ipt+this->getNpts(mode)*idm + (this->getNpts(mode)*this->getNtracks(mode))*ijets + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode))*idR + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode)*this->getdR(mode))*ijetspt20eta2p4 + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode))*ipTratio + 1,bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] ); 
+          weighted_bin_center_loose->SetBinContent(ipt+this->getNpts(mode)*idm + (this->getNpts(mode)*this->getNtracks(mode))*ijets + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode))*idR + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode)*this->getdR(mode))*ijetspt20eta2p4 + (this->getNjets(mode)*this->getNpts(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode))*ipTratio + 1, bin_values[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt]/bin_counters[idm+ijets*this->getNtracks(mode)+idR*this->getNtracks(mode)*this->getNjets(mode)+ijetspt20eta2p4*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)+ipTratio*this->getNtracks(mode)*this->getNjets(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)][ipt] ); 
           
           }
           }

@@ -734,7 +734,6 @@ Int_t GlobalClass::getNjetIndex(const Int_t mode, const Int_t ind)
 
 Int_t GlobalClass::getdRIndex(const Int_t mode, const Int_t ind)
 {
-  // Binning in pt
   Int_t i_j=0;
   Double_t dR = event_s->alltau_dRToLep->at(ind);
   
