@@ -977,9 +977,8 @@ void FFCalculator::calcFFCorr(const Int_t mode, const TString pre_main, const st
 
   int nT=0;
   int nL=0;
-  Double_t bin_values[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={{0}}; //getNpts returns the tau pT binning 
-  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={{0}};
-  
+  Double_t bin_values[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={}; //getNpts returns the tau pT binning 
+  Double_t bin_counters[this->getNjets(mode)*this->getNtracks(mode)*this->getdR(mode)*this->getNjetspt20eta2p4(mode)*this->getpTratio(mode)][this->getNpts(mode)]={};
   
   
 
