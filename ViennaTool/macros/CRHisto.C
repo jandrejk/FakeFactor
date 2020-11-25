@@ -94,6 +94,9 @@ void ProduceMCsubtractedHistos (TString control_region, TString variable_name, T
       if (dataminusMC->GetBinContent(nBin)<0.0){ dataminusMC->SetBinContent(nBin, 0.0);}
     }
 
+    if (sub_all) { // used for QCD estimate in SS region - apply a factor
+      dataminusMC->Scale(QCD_SS_OS_factor);
+    }
     outfile.cd();
     inhist->Write();
     outhist->Write();

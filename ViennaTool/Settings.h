@@ -5,11 +5,11 @@
 #define kTAU         2
 ///////////////////////////////////////////////////
 #define EMB          1  
-#define selCHAN      kTAU
-const int CHAN    = kTAU;
+#define selCHAN      kEL
+const int CHAN    = kEL;
 // FakeFactor_2016_DeepTauIDv2_v0
-const TString analysis ="32_4_2016_MSSM_v1";
-const TString output_folder ="/ceph/jandrej/auto-fakefactors/32_4_2016_MSSM_v1/";
+const TString analysis ="16_1_2016_MSSM_v1";
+const TString output_folder ="/ceph/jandrej/auto-fakefactors/16_1_2016_MSSM_v1/";
 const TString ver = "2016"; // first time nanoAODv5 with deepTauIDv2 
 
 const TString _NtupleTreeName = "TauCheck"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
@@ -20,8 +20,9 @@ const TString user="jandrej";
 const Double_t luminosity=35.87; //according to GOLDEN JSON see https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM    
 const TString ERA = "2016"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
-const int DEBUG    =0; //set to 1 for additional output
+const int DEBUG    =1; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
+const Double_t QCD_SS_OS_factor = 1.1;
 ///////////////////////////////////////////////////
 //Out of date
 const int inclusive_selection=1; 
@@ -44,7 +45,7 @@ const int doCRHisto = 1;
 const int doCalc=1; //calc FFs
 ///////////////////////////////////////////////////
 //calcCorrections
-const int doNJetBinning=1; //Calculate separate corrections for 0jet/1jet
+const int doNJetBinning=0; //Calculate separate corrections for 0jet/1jet
 ///////////////////////////////////////////////////
 //No need to change
 const int doDebugPlots=1;    //1 to also calculate FF in SR; and do bkg estimate with unweighted FF per sample ->for control plots
@@ -71,10 +72,10 @@ const int fit_pT_bins = 1; //use fitted pT bins as input for ff
 // _VVTIGHT        128
 // A WP condition is met if: (Fulfill && !Fail)
 // settings for tight vs vloose&(!tight):
-const int wpTightFulfill = 32;
+const int wpTightFulfill = 16;
 const int wpTightFail    = 0;
-const int wpLooseFulfill  = 4;
-const int wpLooseFail    = 32;
+const int wpLooseFulfill  = 1;
+const int wpLooseFail    = 16;
 ///////////////////////////////////////////////////
 //MUTAU Settings
 #if(selCHAN==kMU)

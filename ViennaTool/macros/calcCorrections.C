@@ -148,11 +148,7 @@ void calcCorrections() {
     Analyzer->calc_nonclosure(_QCD|_AI,                         p+FF_corr_QCD_MCsum_noGen_AI_fitted,     CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI,"",0);
   
     
-      Analyzer->calc_nonclosure(_QCD|_AI|JET0,                      p+FF_corr_QCD_MCsum_noGen_AI_fitted,   CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_0jet, "",0);
-      Analyzer->calc_nonclosure(_QCD|_AI|JET1,                      p+FF_corr_QCD_MCsum_noGen_AI_fitted,   CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_1jet, "",0);
     Analyzer->calc_OSSScorr(_QCD|_AI,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,     SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI, p+FF_corr_QCD_MCsum_noGen_OSSScorr,"",0);
-    Analyzer->calc_OSSScorr(_QCD|_AI|JET0,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,     SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_0jet, p+FF_corr_QCD_MCsum_noGen_OSSScorr_0jet,"",0);
-    Analyzer->calc_OSSScorr(_QCD|_AI|JET1,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,     SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_1jet, p+FF_corr_QCD_MCsum_noGen_OSSScorr_1jet,"",0);
     Analyzer->calc_nonclosure_lepPt(_QCD,                       p+FF_corr_QCD_MCsum_noGen_fitted,        CR_QCD_lepPt_data_MCsubtracted,   p+FF_corr_QCD_MCsum_noGen_nonclosure,    p+FF_corr_QCD_MCsum_noGen_nonclosure_lepPt,"",0);
     
     
@@ -163,7 +159,11 @@ void calcCorrections() {
     
       Analyzer->calc_nonclosure(_QCD|_AI|JET0,                      p+FF_corr_QCD_MCsum_noGen_AI_fitted,   CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_0jet, "",0);
       Analyzer->calc_nonclosure(_QCD|_AI|JET1,                      p+FF_corr_QCD_MCsum_noGen_AI_fitted,   CR_QCD_mvis_AI_data_MCsubtracted, p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_1jet, "",0);
-   
+
+      Analyzer->calc_OSSScorr(_QCD|_AI|JET0,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,     SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_0jet, p+FF_corr_QCD_MCsum_noGen_OSSScorr_0jet,"",0);
+      Analyzer->calc_OSSScorr(_QCD|_AI|JET1,                           p+FF_corr_QCD_MCsum_noGen_AI_fitted,     SR_data_mvis_AI_MCsubtracted,     p+FF_corr_QCD_MCsum_noGen_nonclosure_AI_1jet, p+FF_corr_QCD_MCsum_noGen_OSSScorr_1jet,"",0);
+    
+
       Analyzer->calc_nonclosure_lepPt(_QCD|JET0,                  p+FF_corr_QCD_MCsum_noGen_fitted,        CR_QCD_lepPt_data_MCsubtracted,   p+FF_corr_QCD_MCsum_noGen_nonclosure_0jet, p+FF_corr_QCD_MCsum_noGen_nonclosure_lepPt_0jet,"",0);
       Analyzer->calc_nonclosure_lepPt(_QCD|JET1,                  p+FF_corr_QCD_MCsum_noGen_fitted,        CR_QCD_lepPt_data_MCsubtracted,   p+FF_corr_QCD_MCsum_noGen_nonclosure_1jet, p+FF_corr_QCD_MCsum_noGen_nonclosure_lepPt_1jet,"",0);
     }
