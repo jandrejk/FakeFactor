@@ -20,7 +20,7 @@ const TString user="jandrej";
 const Double_t luminosity=35.87; //according to GOLDEN JSON see https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM    
 const TString ERA = "2016"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
-const int DEBUG    =1; //set to 1 for additional output
+const int DEBUG    =0; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
 const Double_t QCD_SS_OS_factor = 1.1;
 ///////////////////////////////////////////////////
