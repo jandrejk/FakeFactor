@@ -22,7 +22,7 @@ const TString ERA = "2016"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
 const int DEBUG=0; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
-const int JetThreshold50ForNjets = 1; //0 -> default 30 GeV is the jet threshold. 1-> 50 is used instead (used in LQ analysis)
+const int JetThreshold50ForNjets = 1; //0 -> default 30 GeV is the jet threshold. 1-> 50 is used instead (used in LQ Analysis)
 const int inclusive_selection=1; // used in convert_inputs.C
 const int exclusive_selection=1; // used in convert_inputs.C
 ///////////////////////////////////////////////////
@@ -73,7 +73,7 @@ const int fit_pT_bins = 1; //use fitted pT bins as input for ff
 // _VVTIGHT        128
 // A WP condition is met if: (Fulfill && !Fail)
 // settings for tight vs vloose&(!tight):
-const int wpTightFulfill = 32; 
+const int wpTightFulfill = 32;
 const int wpTightFail    = 0;
 const int wpLooseFulfill = 4;
 const int wpLooseFail    = 32;
