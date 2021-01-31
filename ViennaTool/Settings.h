@@ -9,7 +9,7 @@
 const int CHAN     = kEL;
 // FakeFactor_2016_DeepTauIDv2_v0
 const TString analysis      ="2018";
-const TString output_folder ="/ceph/jandrej/auto-puppi-fakefactors/2018";
+const TString output_folder ="/ceph/jandrej/auto-fakefactors/2018";
 const TString ver = "2018"; // first time nanoAODv5 with deepTauIDv2 
 
 const TString _NtupleTreeName = "TauCheck"; // name of the TTree in the Analysis-Ntuple: mt-nominal/ntuple or TauCheck
@@ -22,11 +22,12 @@ const TString ERA = "2018"; // needed for plotting
 const int use_svfit = 0; //set to 1 to change input directory name accordingly
 const int DEBUG=0; //set to 1 for additional output
 const int usePt_nonclosure_Wjets = 1; //0 -> mvis is used. =1 -> pT lepton is used
-
+const int JetThreshold50ForNjets = 1; //0 -> default 30 GeV is the jet threshold. 1-> 50 is used instead (used in LQ analysis)
+const int inclusive_selection=1; // used in convert_inputs.C
+const int exclusive_selection=1; // used in convert_inputs.C
 ///////////////////////////////////////////////////
 //Out of date
-const int inclusive_selection=1; 
-const int exclusive_selection=1; 
+
 const int useVV=1;
 const int useMVAMET=0;
 ///////////////////////////////////////////////////
@@ -72,7 +73,7 @@ const int fit_pT_bins = 1; //use fitted pT bins as input for ff
 // _VVTIGHT        128
 // A WP condition is met if: (Fulfill && !Fail)
 // settings for tight vs vloose&(!tight):
-const int wpTightFulfill = 64; 
+const int wpTightFulfill = 64;
 const int wpTightFail    = 0;
 const int wpLooseFulfill  = 2;
 const int wpLooseFail    = 64;
@@ -153,29 +154,41 @@ const Double_t QCD_SS_TO_OS=1.06;
 
 //////////////////////////////////////////////////
 //extra fit uncertainties
-const int useExtraFitUncertainties = 1;
-const Double_t QCD_fitErr_dm0njet0_mt = 0.02;
-const Double_t QCD_fitErr_dm0njet1_mt = 0.04;
-const Double_t QCD_fitErr_dm1njet0_mt = 0.08;
-const Double_t QCD_fitErr_dm1njet1_mt = 0.08;
-const Double_t W_fitErr_dm0njet0_mt = 0.02;
-const Double_t W_fitErr_dm0njet1_mt = 0.02;
-const Double_t W_fitErr_dm1njet0_mt = 0.05;
-const Double_t W_fitErr_dm1njet1_mt = 0.05;
-const Double_t QCD_fitErr_dm0njet0_et = 0.02;
-const Double_t QCD_fitErr_dm0njet1_et = 0.04;
-const Double_t QCD_fitErr_dm1njet0_et = 0.08;
-const Double_t QCD_fitErr_dm1njet1_et = 0.08;
-const Double_t W_fitErr_dm0njet0_et = 0.02;
-const Double_t W_fitErr_dm0njet1_et = 0.02;
-const Double_t W_fitErr_dm1njet0_et = 0.05;
-const Double_t W_fitErr_dm1njet1_et = 0.05;
-const Double_t QCD_fitErr_dm0njet0_tt = 0.02;
-const Double_t QCD_fitErr_dm0njet1_tt = 0.04;
-const Double_t QCD_fitErr_dm1njet0_tt = 0.08;
-const Double_t QCD_fitErr_dm1njet1_tt = 0.08;
-//extra OSSS uncertainties
-const int useExtraOSSSuncertainty = 1;
+const int useExtraFitUncertainties = 1; // used in convert_inputs.C
+const Double_t QCD_fitErr_dr0njet0_mt = 0.02;
+const Double_t QCD_fitErr_dr0njet1_mt = 0.04;
+const Double_t QCD_fitErr_dr0njet2_mt = 0.06;
+const Double_t QCD_fitErr_dr1njet0_mt = 0.08;
+const Double_t QCD_fitErr_dr1njet1_mt = 0.08;
+const Double_t QCD_fitErr_dr1njet2_mt = 0.08;
+const Double_t W_fitErr_dr0njet0_mt   = 0.02;
+const Double_t W_fitErr_dr0njet1_mt   = 0.04;
+const Double_t W_fitErr_dr0njet2_mt   = 0.06;
+const Double_t W_fitErr_dr1njet0_mt   = 0.02;
+const Double_t W_fitErr_dr1njet1_mt   = 0.04;
+const Double_t W_fitErr_dr1njet2_mt   = 0.06;
+
+const Double_t QCD_fitErr_dr0njet0_et = 0.02;
+const Double_t QCD_fitErr_dr0njet1_et = 0.04;
+const Double_t QCD_fitErr_dr0njet2_et = 0.06;
+const Double_t QCD_fitErr_dr1njet0_et = 0.08;
+const Double_t QCD_fitErr_dr1njet1_et = 0.08;
+const Double_t QCD_fitErr_dr1njet2_et = 0.08;
+const Double_t W_fitErr_dr0njet0_et   = 0.02;
+const Double_t W_fitErr_dr0njet1_et   = 0.04;
+const Double_t W_fitErr_dr0njet2_et   = 0.06;
+const Double_t W_fitErr_dr1njet0_et   = 0.02;
+const Double_t W_fitErr_dr1njet1_et   = 0.04;
+const Double_t W_fitErr_dr1njet2_et   = 0.06;
+
+const Double_t QCD_fitErr_dr0njet0_tt = 0.02;
+const Double_t QCD_fitErr_dr0njet1_tt = 0.04;
+const Double_t QCD_fitErr_dr0njet2_tt = 0.06;
+const Double_t QCD_fitErr_dr1njet0_tt = 0.08;
+const Double_t QCD_fitErr_dr1njet1_tt = 0.08;
+const Double_t QCD_fitErr_dr1njet2_tt = 0.08;
+//extra OSSS uncertainties 
+const int useExtraOSSSuncertainty = 1; // used in convert_inputs.C
 const Double_t OSSSuncertainty_mt = 0.1;
 const Double_t OSSSuncertainty_et = 0.1;
 const Double_t OSSSuncertainty_tt = 0.1;

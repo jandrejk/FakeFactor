@@ -50,7 +50,7 @@ double GaussianKernelSmoother::getSmoothedValue( TH1D* m_h , const double x) {
 double GaussianKernelSmoother::getSmoothedValue(TH1D* m_h , const double m_x, const double bin_width){
 
   double x;
-  if ( doLastBinFrom && m_x > lastBinFrom ) x=lastBinFrom; // obsolete doLastBinFrom=0
+  if ( doLastBinFrom && m_x > lastBinFrom ) x=lastBinFrom; 
   else x=m_x;
 
   double sumw = 0.;
@@ -182,14 +182,32 @@ void GaussianKernelSmoother::getContSmoothHisto(){
     for (int it=0; it<NTOYS; it++){
       TH1D *h_rnd=this->fluctuateHisto();
       for (int ib=0; ib<nbins; ib++){
-        ys_rnd[ib]=this->getSmoothedValue( h_rnd , xs[ib], binWidthforGaussianWindow );
+        // std::cout << this->getSmoothedValue( h_rnd , xs[ib], binWidthforGaussianWindow ) << " ";
+        if (doLastBinFrom && xs[ib] > lastBinFrom) {
+          break;
+          // ys_rnd[ib] = h_rnd->GetBinContent(h_rnd->GetXaxis()->FindBin(lastBinFrom)) + xs[ib];
+        }
+        else {
+          ys_rnd[ib]=this->getSmoothedValue( h_rnd , xs[ib], binWidthforGaussianWindow );
+        }
         toys[ib].push_back( ys_rnd[ib] );
       }
       delete h_rnd;
     }
     
+    double lastYerror = 0;
+    double x_0 = 0;
     for (int i=0; i<nbins; i++){
-      ys_err[i]  = this->std_dev( toys[i] );
+      if (doLastBinFrom && xs[i] > lastBinFrom) {
+        ys_err[i] = lastYerror * (1 + 10*(xs[i]-x_0) / (nbins-x_0) );
+      }
+      else {
+        lastYerror = this->std_dev( toys[i] );
+        x_0 = xs[i];
+        ys_err[i]  = lastYerror;
+
+      }
+      // std::cout << ys_err[i] << " ";
     }
 
     g_out=new TGraphAsymmErrors( nbins , xs , ys , 0 , 0 , ys_err , ys_err );
