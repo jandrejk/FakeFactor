@@ -233,7 +233,7 @@ void fitFakeFactors(){
           TGraphAsymmErrors *g_fit=cf.returnFitGraph();              //the fit result binned (histo)
           TGraphAsymmErrors *g_fit2=new TGraphAsymmErrors( *g_fit );
 
-          double ymax = 0.5; 
+          double ymax = 0.8; 
           double ymin = 0.001;
           
           for(int i=0; i<g_fit->GetN(); i++) {
@@ -400,10 +400,10 @@ void fitFakeFactors(){
           TString dRMode="inclusive";
           if(modes.at(imode) & _W_JETS) {
             if(idR == 0) {
-              dRMode = "< 3";
+              dRMode = "< 2";
             }
             else {
-              dRMode = "#geq 3";
+              dRMode = "#geq 2";
             }
           }
 

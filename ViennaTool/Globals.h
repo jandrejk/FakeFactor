@@ -122,7 +122,7 @@ const TString s_tight        ="tight";
 
 
 //Output directories
-const TString path_presel        = "/ceph/"+user+"/auto-puppi-fakefactors/"+analysis+"/preselection/"+s_chan[CHAN]+"/";
+const TString path_presel        = "/ceph/"+user+"/auto-fakefactors/"+analysis+"/preselection/"+s_chan[CHAN]+"/";
 const TString path_ff            = "ViennaTool/fakefactor/";
 const TString path_ff_data       = path_ff+"data_"+s_chan[CHAN]+"/";
 const TString path_ff_mc         = path_ff+"mc_"+s_chan[CHAN]+"/";
@@ -534,12 +534,12 @@ const Int_t N_t_DY = sizeof(Decay_cuts_DY)/sizeof(Int_t);
 const Int_t N_t_TT = sizeof(Decay_cuts_TT)/sizeof(Int_t);
 const Int_t N_t_QCD = sizeof(Decay_cuts_QCD)/sizeof(Int_t);
 
-const Int_t Njet_cuts_Wjets[] = {0,1,2};
+const Int_t Njet_cuts_Wjets[] = {0,1};
 const Int_t Njet_cuts_DY[] = {0,1};
 //const Int_t Njet_cuts_TT[] = {0};
-const Int_t Njet_cuts_TT_SR[] = {0,2};
-const Int_t Njet_cuts_TT_CR[] = {0,2};
-const Int_t Njet_cuts_QCD[] = {0,1,2};
+const Int_t Njet_cuts_TT_SR[] = {0};
+const Int_t Njet_cuts_TT_CR[] = {0};
+const Int_t Njet_cuts_QCD[] = {0,1};
 
 const Int_t N_j_Wjets = sizeof(Njet_cuts_Wjets)/sizeof(Int_t);
 const Int_t N_j_DY = sizeof(Njet_cuts_DY)/sizeof(Int_t);
@@ -549,7 +549,7 @@ const Int_t N_j_TT_CR = sizeof(Njet_cuts_TT_CR)/sizeof(Int_t);
 const Int_t N_j_QCD = sizeof(Njet_cuts_QCD)/sizeof(Int_t);
 
 //dR cuts 
-const Double_t dRTauLep_cuts_Wjets[] = {0,3.0};
+const Double_t dRTauLep_cuts_Wjets[] = {0,2.0};
 const Double_t dRTauLep_cuts_DY[] = {0};
 const Double_t dRTauLep_cuts_TT_SR[] = {0};
 const Double_t dRTauLep_cuts_TT_CR[] = {0};
@@ -564,7 +564,7 @@ const Int_t N_dR_QCD = sizeof(dRTauLep_cuts_QCD)/sizeof(Double_t);
 const Int_t nbins_svfit=35;  const Double_t hist_min_svfit=0.;  const Double_t hist_max_svfit=350.;
 const Int_t nbins_lepPt=20;  const Double_t hist_min_lepPt=20.; const Double_t hist_max_lepPt=120.;
 const Int_t nbins_mt=25;     const Double_t hist_min_mt=0.;     const Double_t hist_max_mt=250.;
-const Int_t nbins_mvis=15;   const Double_t hist_min_mvis=0.;   const Double_t hist_max_mvis=250.;
+const Int_t nbins_mvis=60;   const Double_t hist_min_mvis=0.;   const Double_t hist_max_mvis=1000.;
 const Int_t nbins_pt=25;     const Double_t hist_min_pt=20.;    const Double_t hist_max_pt=100.;
 const Int_t nbins_eta=20;    const Double_t hist_min_eta=-3.5;  const Double_t hist_max_eta=3.5;
 
@@ -578,7 +578,8 @@ const Double_t w_mttot_v[]={0,70,100,120,140,170,200,270,1000};
 const Int_t    w_pt_n=(sizeof(w_pt_v)/sizeof(Double_t)) -1;
 const Int_t    w_mttot_n=(sizeof(w_mttot_v)/sizeof(Double_t)) -1;
 
-const Double_t w_mvis_v[]={0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,200,250,450};
+// const Double_t w_mvis_v[]={0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,200,250,400,600,1000,3000};
+const Double_t w_mvis_v[]={0,40,70,100,120,140,160,180,200,250,400,600,1000,5000};
 const Int_t w_mvis_n=(sizeof(w_mvis_v)/sizeof(Double_t)) -1;
 
 #if(selCHAN == kEL)
