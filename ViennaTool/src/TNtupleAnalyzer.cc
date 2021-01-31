@@ -238,7 +238,24 @@ void TNtupleAnalyzer::SetNewEventInfo() {
   bpt_1=event->bpt_1;
   bpt_2=event->bpt_2;
   nbtag=event->nbtag;
-  njets=event->njets;
+
+  if (JetThreshold50ForNjets==1) {
+    // new definition of njets for LQ analysis having a pT threshold @50 GeV
+    if (event->jpt_1 < 50) {
+      njets = 0;
+    }
+    else {
+      if (event->jpt_2 < 50) {
+        njets = 1;  
+      }
+      else { // in fact in this case Njets >=2 but it is enough to assign a 2 since at most 2j categories are used
+        njets = 2;
+      }
+    }
+  }
+  else {
+    njets=event->njets;
+  }
   mjj=event->mjj;
   met=event->met;
   jdeta=event->jdeta;
