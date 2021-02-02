@@ -78,7 +78,7 @@ double GaussianKernelSmoother::getSmoothedValue(TH1D* m_h , const double m_x, co
   for (int ib=1; ib<=nbins; ib++){
     double yi = m_h->GetBinContent(ib);
     double ei = m_h->GetBinError(ib);
-    if ( fabs(yi)<1e-8 && ei<1e-8 ) {
+    if ( fabs(yi)<1e-8 && ei<1e-8 || yi<0 ) {
       // std::cout << "Found low bin content and low uncertainty" << std::endl;
       continue;
     }
@@ -91,8 +91,8 @@ double GaussianKernelSmoother::getSmoothedValue(TH1D* m_h , const double m_x, co
     sumw += wi;
     sumwy += wi*yi;
   }
-   
-  double val = 0.;
+  
+ double val = 0.;
   if (sumw>0.) val = sumwy/sumw;
     
   return val;
