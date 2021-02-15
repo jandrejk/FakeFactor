@@ -1854,11 +1854,16 @@ void FFCalculator::calc_nonclosure(const Int_t mode, const TString raw_ff, const
   gsk.set_doErrors(1);
   //if(mode & _QCD) gsk.set_lastBinFrom(150);
   gsk.setWidth(fitWidth);
-  gsk.set_widthInBins_sf(0.1);
+  if(CHAN==kTAU) {
+    gsk.set_widthInBins_sf(0.01);
+    gsk.set_lastBinFrom(200); 
+  }
+  else {
+    gsk.set_widthInBins_sf(0.1);
+    gsk.set_lastBinFrom(400);
+  } 
 
-  gsk.set_lastBinFrom(400);
   
-
   
   gsk.getSmoothHisto();
   TH1D *h2=gsk.returnSmoothedHisto(); //nonclosure_fit_smoothed is returned
@@ -1868,10 +1873,11 @@ void FFCalculator::calc_nonclosure(const Int_t mode, const TString raw_ff, const
   
   gsk.set_doErrors(1);
   gsk.getContSmoothHisto();
-  TGraphAsymmErrors *g=   gsk.returnSmoothedGraph();
+  TGraphAsymmErrors *g=   gsk.returnSmoothedGraph(); 
   Double_t x200; Double_t y200;
   if(CHAN==kMU)g->GetPoint(240,x200,y200); //make constant continuation from mvis 240 onwards
   if(CHAN==kEL)g->GetPoint(240,x200,y200); // TODO CHANGE (110*4,x200,y200)
+  if(CHAN==kTAU)g->GetPoint(200*2/5.,x200,y200); // TODO CHANGE (110*4,x200,y200)
   std::cout<< "x200: " << x200 << " " << "y200: " << y200 << std::endl;
   // exit(0);
 
@@ -3377,10 +3383,11 @@ void FFCalculator::calc_OSSScorr(const Int_t mode, const TString raw_ff, const T
   gsk.set_doErrors(1);
   gsk.setWidth( 2. );
   gsk.set_widthInBins_sf(0.1);
-  gsk.set_lastBinFrom(400);
-
+  if(CHAN != kTAU ) gsk.set_lastBinFrom(400);
+  else gsk.set_lastBinFrom(200);
+  
   if(CHAN ==kTAU ) gsk.setWidth(0.7);
-  if(CHAN ==kTAU ) gsk.set_widthInBins_sf(0.2);
+  if(CHAN ==kTAU ) gsk.set_widthInBins_sf(0.005);
   else gsk.set_widthInBins_sf(1.115);
   //if(mode & _QCD) gsk.set_lastBinFrom(170);
   gsk.getSmoothHisto();
@@ -3394,15 +3401,21 @@ void FFCalculator::calc_OSSScorr(const Int_t mode, const TString raw_ff, const T
   TGraphAsymmErrors *g=   gsk.returnSmoothedGraph();
 
   Double_t x200; Double_t y200;
-  if(CHAN==kMU)g->GetPoint(200*4,x200,y200);
-  if(CHAN==kEL)g->GetPoint(190*4,x200,y200); // TODO CHANGE (110*4,x200,y200)
+  if(CHAN==kTAU)g->GetPoint(400*2/5.,x200,y200);
+  if(CHAN==kMU)g->GetPoint(400*2/5.,x200,y200);
+  if(CHAN==kEL)g->GetPoint(400*2/5.,x200,y200); // TODO CHANGE (110*4,x200,y200)
+  
   for(int i=0; i<g->GetN(); i++){
     Double_t x; Double_t y;
-    if(CHAN==kMU && i>200*4){
+    if(CHAN==kMU && i>400*2/5.){
       g->GetPoint(i,x,y);
       g->SetPoint(i,x,y200);
     }
-    else if(CHAN==kEL && i>190*4){ //CHANGE 110
+    else if(CHAN==kEL && i>400*2/5.){ //CHANGE 110
+      g->GetPoint(i,x,y);
+      g->SetPoint(i,x,y200);
+    }
+    else if(CHAN==kTAU && i>400*2/5.){ //CHANGE 110
       g->GetPoint(i,x,y);
       g->SetPoint(i,x,y200);
     }
