@@ -579,7 +579,7 @@ const Int_t    w_pt_n=(sizeof(w_pt_v)/sizeof(Double_t)) -1;
 const Int_t    w_mttot_n=(sizeof(w_mttot_v)/sizeof(Double_t)) -1;
 
 // const Double_t w_mvis_v[]={0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,200,250,400,600,1000,3000};
-const Double_t w_mvis_v[]={0,40,70,100,120,140,160,180,200,250,400,600,1000,5000};
+const Double_t w_mvis_v[]={0,40,50,60,70,80,90,100,120,140,160,180,200,250,400,600,1000,5000};
 const Int_t w_mvis_n=(sizeof(w_mvis_v)/sizeof(Double_t)) -1;
 
 #if(selCHAN == kEL)
