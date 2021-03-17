@@ -1049,6 +1049,8 @@ void combineWSystematics_morphed( TString fW_nonclosure, TString sys_nonclosure,
     n_morph_mt += 1;
     i_morph_mt = i;
   }
+  std ::cout << "n_morph_mt: " << n_morph_mt << std::endl; 
+  std ::cout << "i_morph_mt: " << i_morph_mt << std::endl; 
   double morphed_high; double morphed_low; 
   // cout << "i-Bins: " << sys_nonclosure_t->GetN() << " , j-Bins: " << sys_mtcorr_t->GetN() << endl;
   for(Int_t i=0; i<=sys_nonclosure_t_up->GetN(); i++){

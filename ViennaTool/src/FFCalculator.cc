@@ -1857,10 +1857,12 @@ void FFCalculator::calc_nonclosure(const Int_t mode, const TString raw_ff, const
   if(CHAN==kTAU) {
     gsk.set_widthInBins_sf(0.01);
     gsk.set_lastBinFrom(200); 
+    gsk.set_lastBinBeforeFlat(800);
   }
   else {
     gsk.set_widthInBins_sf(0.1);
     gsk.set_lastBinFrom(400);
+    gsk.set_lastBinBeforeFlat(800);
   } 
 
   
@@ -3386,6 +3388,8 @@ void FFCalculator::calc_OSSScorr(const Int_t mode, const TString raw_ff, const T
   if(CHAN != kTAU ) gsk.set_lastBinFrom(400);
   else gsk.set_lastBinFrom(200);
   
+  gsk.set_lastBinBeforeFlat(800);
+  
   if(CHAN ==kTAU ) gsk.setWidth(0.7);
   if(CHAN ==kTAU ) gsk.set_widthInBins_sf(0.005);
   else gsk.set_widthInBins_sf(1.115);
@@ -3541,7 +3545,8 @@ void FFCalculator::calc_mtcorr(const Int_t mode, const TString raw_ff, const TSt
   gsk.set_doWidthInBins(1);
   gsk.setWidth(1.2);
   gsk.set_widthInBins_sf(0.1);
-  gsk.set_lastBinFrom(600);
+  gsk.set_lastBinFrom(400);
+  gsk.set_lastBinBeforeFlat(800);
 
   /*
   Double_t lastBin;

@@ -35,6 +35,10 @@ class GaussianKernelSmoother
     this->lastBinFrom = m_lastBinFrom; 
     this->doLastBinFrom = 1;
   }
+  void set_lastBinBeforeFlat( double m_lastBinNonFlat ){ 
+    this->lastBinNonFlat = m_lastBinNonFlat; 
+    this->doMakeFlatFrom = 1;
+  }
   void getSmoothHisto();
   void getContSmoothHisto();
   void createTestHisto();
@@ -84,8 +88,9 @@ class GaussianKernelSmoother
   int doWeights;
   TString kernelDistance;
   double lastBinFrom;
+  double lastBinNonFlat;
   int doLastBinFrom;
-
+  int doMakeFlatFrom;
   TRandom3 rand;
   //        self.weights = None
   //	  self.rescaling = lambda x:x
