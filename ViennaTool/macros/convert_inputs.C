@@ -357,9 +357,9 @@ void make_3Dhisto( TString fn , const TString hn , const TString hnout , const T
         stringstream func_name;    func_name    << "f_dm0" << "_njet" << ijet << "dR" << idr ;
         stringstream fitted_histo_mcup;     fitted_histo_mcup << "dm0" << "_njet" << ijet << "dR" << idr << "_mcup";
         stringstream fitted_histo_mcdown; fitted_histo_mcdown << "dm0" << "_njet" << ijet << "dR" << idr <<  "_mcdown";
-        std::cout << fitted_histo.str().c_str() << std::endl;
-        std::cout << fitted_histo_mcup.str().c_str() << std::endl;
-        std::cout << fitted_histo_mcdown.str().c_str() << std::endl;
+        // std::cout << fitted_histo.str().c_str() << std::endl;
+        // std::cout << fitted_histo_mcup.str().c_str() << std::endl;
+        // std::cout << fitted_histo_mcdown.str().c_str() << std::endl;
     
         TGraphAsymmErrors *h=(TGraphAsymmErrors*)        f->Get(fitted_histo.str().c_str());
         TGraphAsymmErrors *h_mcup=(TGraphAsymmErrors*)   f->Get(fitted_histo_mcup.str().c_str());
@@ -914,7 +914,8 @@ void combineQCDSystematics_morphed( TString fQCD_nonclosure, TString sys_nonclos
   TH1D *out_t_pt_down = new TH1D(tout+"_pt_down", tout+"_pt_down", sys_otherLep_t_down->GetN(), sys_otherLep_t_down->GetX()[0], sys_otherLep_t_down->GetX()[sys_otherLep_t_down->GetN()-1]);
   
   double morphed_high; double morphed_low;
-  double mvis_max = 250.0;
+  double mvis_max = 120.0;
+  double mvis_max_osss = 400.0;
   Int_t n_morph_mvis = 0; Int_t i_morph_mvis = 0;
   Int_t n_morph_mvis_osss = 0; Int_t i_morph_mvis_osss = 0;
 
@@ -922,12 +923,12 @@ void combineQCDSystematics_morphed( TString fQCD_nonclosure, TString sys_nonclos
     n_morph_mvis += 1;
     i_morph_mvis = i;
   }
-  for(Int_t i=0; sys_OSSS_t_up->GetX()[i] < mvis_max; i++){
+  for(Int_t i=0; sys_OSSS_t_up->GetX()[i] < mvis_max_osss; i++){
     n_morph_mvis_osss += 1;
     i_morph_mvis_osss = i;
   }
   double pt_max = 9999.0;
-  if( CHAN!=kTAU) {
+  if( CHAN!=kTAU) { // then it is probably lepton iso 
       pt_max = 0.15;
   }
   else {
@@ -938,8 +939,8 @@ void combineQCDSystematics_morphed( TString fQCD_nonclosure, TString sys_nonclos
     n_morph_pt += 1;
     i_morph_pt = i;
   }
-  std::cout << i_morph_pt << std::endl;
-  std::cout << sys_otherLep_t_down->GetX()[i_morph_pt] << std::endl;
+  // std::cout << i_morph_pt << std::endl;
+  // std::cout << sys_otherLep_t_down->GetX()[i_morph_pt] << std::endl;
   for(Int_t i=0; i<=sys_nonclosure_t_down->GetN(); i++){
     morphed_high = (-sys_nonclosure_t_down->GetY()[i])*float( n_morph_mvis-i-1)/(n_morph_mvis-1) + (sys_nonclosure_t_up->GetY()[i])*float(i)/(n_morph_mvis-1);
     morphed_low = (sys_nonclosure_t_up->GetY()[i])*float( n_morph_mvis-i-1)/(n_morph_mvis-1) + (-sys_nonclosure_t_down->GetY()[i])*float(i)/(n_morph_mvis-1);
@@ -954,8 +955,8 @@ void combineQCDSystematics_morphed( TString fQCD_nonclosure, TString sys_nonclos
     morphed_high = (-sys_OSSS_t_down->GetY()[i])*float( n_morph_mvis_osss-i-1)/(n_morph_mvis_osss-1) + (sys_OSSS_t_up->GetY()[i])*float(i)/(n_morph_mvis_osss-1);
     morphed_low = (sys_OSSS_t_up->GetY()[i])*float( n_morph_mvis_osss-i-1)/(n_morph_mvis_osss-1) + (-sys_OSSS_t_down->GetY()[i])*float(i)/(n_morph_mvis_osss-1);
     if (i>i_morph_mvis_osss){
-      morphed_high = (-sys_OSSS_t_down->GetY()[i_morph_mvis_osss])*float( n_morph_mvis_osss-i_morph_mvis_osss-1)/(n_morph_mvis_osss-1) + (sys_OSSS_t_up->GetY()[i_morph_mvis_osss])*float(i_morph_mvis_osss)/(n_morph_mvis_osss-1);
-      morphed_low = (sys_OSSS_t_up->GetY()[i_morph_mvis_osss])*float( n_morph_mvis_osss-i_morph_mvis_osss-1)/(n_morph_mvis_osss-1) + (-sys_OSSS_t_down->GetY()[i_morph_mvis_osss])*float(i_morph_mvis_osss)/(n_morph_mvis_osss-1);
+      morphed_high = sys_OSSS_t_up->GetY()[i]; // (-sys_OSSS_t_down->GetY()[i_morph_mvis_osss])*float( n_morph_mvis_osss-i_morph_mvis_osss-1)/(n_morph_mvis_osss-1) + (sys_OSSS_t_up->GetY()[i_morph_mvis_osss])*float(i_morph_mvis_osss)/(n_morph_mvis_osss-1);
+      morphed_low = -sys_OSSS_t_down->GetY()[i]; // (sys_OSSS_t_up->GetY()[i_morph_mvis_osss])*float( n_morph_mvis_osss-i_morph_mvis_osss-1)/(n_morph_mvis_osss-1) + (-sys_OSSS_t_down->GetY()[i_morph_mvis_osss])*float(i_morph_mvis_osss)/(n_morph_mvis_osss-1);
     }
     out_t_mvis_osss_up->SetBinContent(i,morphed_high);
     out_t_mvis_osss_down->SetBinContent(i,morphed_low);
@@ -1005,9 +1006,9 @@ void combineWSystematics( TString fW_nonclosure, TString sys_nonclosure, TString
       //overwriting overflow bin (otherwise: inf error):
       if( j == 2000) out_t->SetBinContent(i,j, out_t->GetBinContent(i,j-1));
       if( i == 2000) out_t->SetBinContent(i,j, out_t->GetBinContent(i-1,j));
-      if( out_t->GetBinContent(i,j) > 1){
-        cout << i << " " << j << " " << out_t->GetBinContent(i,j) << endl;
-      } 
+      // if( out_t->GetBinContent(i,j) > 1){
+      //   cout << i << " " << j << " " << out_t->GetBinContent(i,j) << endl;
+      // } 
     }
   }
   out_t->SetBinContent(2000,2000, out_t->GetBinContent(2000,1999) );
@@ -1049,8 +1050,6 @@ void combineWSystematics_morphed( TString fW_nonclosure, TString sys_nonclosure,
     n_morph_mt += 1;
     i_morph_mt = i;
   }
-  std ::cout << "n_morph_mt: " << n_morph_mt << std::endl; 
-  std ::cout << "i_morph_mt: " << i_morph_mt << std::endl; 
   double morphed_high; double morphed_low; 
   // cout << "i-Bins: " << sys_nonclosure_t->GetN() << " , j-Bins: " << sys_mtcorr_t->GetN() << endl;
   for(Int_t i=0; i<=sys_nonclosure_t_up->GetN(); i++){
@@ -1066,10 +1065,12 @@ void combineWSystematics_morphed( TString fW_nonclosure, TString sys_nonclosure,
   for(Int_t i=0; i<=sys_mtcorr_t_up->GetN(); i++){
     morphed_high = (-sys_mtcorr_t_down->GetY()[i])*float( n_morph_mt-i-1)/(n_morph_mt-1) + (sys_mtcorr_t_up->GetY()[i])*float(i)/(n_morph_mt-1);
     morphed_low = (sys_mtcorr_t_up->GetY()[i])*float( n_morph_mt-i-1)/(n_morph_mt-1) + (-sys_mtcorr_t_down->GetY()[i])*float(i)/(n_morph_mt-1);
+    
     if (i>i_morph_mt){
-      morphed_high = (-sys_mtcorr_t_down->GetY()[i_morph_mt])*float( n_morph_mt-i_morph_mt-1)/(n_morph_mt-1) + (sys_mtcorr_t_up->GetY()[i_morph_mt])*float(i_morph_mt)/(n_morph_mt-1);
-      morphed_low = (sys_mtcorr_t_up->GetY()[i_morph_mt])*float( n_morph_mt-i_morph_mt-1)/(n_morph_mt-1) + (-sys_mtcorr_t_down->GetY()[i_morph_mt])*float(i_morph_mt)/(n_morph_mt-1);
+      morphed_high = sys_mtcorr_t_up->GetY()[i]; //(-sys_mtcorr_t_down->GetY()[i_morph_mt])*float( n_morph_mt-i_morph_mt-1)/(n_morph_mt-1) + (sys_mtcorr_t_up->GetY()[i_morph_mt])*float(i_morph_mt)/(n_morph_mt-1);
+      morphed_low = (-sys_mtcorr_t_down->GetY()[i]); //(sys_mtcorr_t_up->GetY()[i_morph_mt])*float( n_morph_mt-i_morph_mt-1)/(n_morph_mt-1) + (-sys_mtcorr_t_down->GetY()[i_morph_mt])*float(i_morph_mt)/(n_morph_mt-1);
     }
+
     out_t_mt_up->SetBinContent(i,morphed_high );
     out_t_mt_down->SetBinContent(i,morphed_low );
     //overwriting overflow bin (otherwise: inf error)
@@ -1112,7 +1113,8 @@ void combineTTSystematics( TString fTT_nonclosure, TString sys_nonclosure, TStri
   for(Int_t i=0; i<=sys_nonclosure_t->GetN(); i++){
     out_t->SetBinContent(i,TMath::Sqrt( TMath::Power(sys_nonclosure_t->GetY()[i],2)+TMath::Power(scale_factors[0],2) ));    
   }
-  // cout << "TT-Outputfile: " << fout.ReplaceAll(".root",tight_cat+".root") << endl;
+  cout << "TT-Outputfile: " << fout.ReplaceAll(".root",tight_cat+".root") << endl;
+  
   TFile *fout_f=new TFile(fout.ReplaceAll(".root",tight_cat+".root"),"UPDATE");
   fout_f->cd();
   out_t->Write();
@@ -1149,20 +1151,20 @@ void combineTTSystematics_morphed( TString fTT_nonclosure, TString sys_nonclosur
   TH1D *out_t_down = new TH1D(tout+"_morphed_down", tout+"_morphed_down", sys_nonclosure_t_down->GetN(), sys_nonclosure_t_down->GetX()[0], sys_nonclosure_t_down->GetX()[sys_nonclosure_t_down->GetN()-1]);
   TH1D *out_t_sf = new TH1D(tout+"_sf", tout+"_sf", sys_nonclosure_t_down->GetN(), sys_nonclosure_t_down->GetX()[0], sys_nonclosure_t_down->GetX()[sys_nonclosure_t_down->GetN()-1]);
   double morphed_high; double morphed_low;
-  // double mvis_max = 250.0;
-  // Int_t n_morph_mvis = 0; Int_t i_morph_mvis = 0;
-  // for(Int_t i=0; sys_nonclosure_t_up->GetX()[i] < mvis_max; i++){
-  //   n_morph_mvis += 1;
-  //   i_morph_mvis = i;
-  // }
+  double mvis_max = 400.0;
+  Int_t n_morph_mvis = 0; Int_t i_morph_mvis = 0;
+  for(Int_t i=0; sys_nonclosure_t_up->GetX()[i] < mvis_max; i++){
+    n_morph_mvis += 1;
+    i_morph_mvis = i;
+  }
 
   for(Int_t i=0; i<=sys_nonclosure_t_down->GetN(); i++){
-    morphed_high = (-sys_nonclosure_t_down->GetY()[i])*float( sys_nonclosure_t_down->GetN()-i-1)/(sys_nonclosure_t_down->GetN()-1) + (sys_nonclosure_t_up->GetY()[i])*float(i)/(sys_nonclosure_t_down->GetN()-1);
-    morphed_low = (sys_nonclosure_t_up->GetY()[i])*float( sys_nonclosure_t_down->GetN()-i-1)/(sys_nonclosure_t_down->GetN()-1) + (-sys_nonclosure_t_down->GetY()[i])*float(i)/(sys_nonclosure_t_down->GetN()-1);
-    // if (i>i_morph_mvis){
-    //   morphed_high = (-sys_nonclosure_t_down->GetY()[i_morph_mvis])*float( n_morph_mvis-i_morph_mvis-1)/(n_morph_mvis-1) + (sys_nonclosure_t_up->GetY()[i_morph_mvis])*float(i_morph_mvis)/(n_morph_mvis-1);
-    //   morphed_low = (sys_nonclosure_t_up->GetY()[i_morph_mvis])*float( n_morph_mvis-i_morph_mvis-1)/(n_morph_mvis-1) + (-sys_nonclosure_t_down->GetY()[i_morph_mvis])*float(i_morph_mvis)/(n_morph_mvis-1);
-    // }
+    morphed_high = (-sys_nonclosure_t_down->GetY()[i])*float( n_morph_mvis-i-1)/(n_morph_mvis-1) + (sys_nonclosure_t_up->GetY()[i])*float(i)/(n_morph_mvis-1);
+    morphed_low = (sys_nonclosure_t_up->GetY()[i])*float( n_morph_mvis-i-1)/(n_morph_mvis-1) + (-sys_nonclosure_t_down->GetY()[i])*float(i)/(n_morph_mvis-1);
+    if (i>i_morph_mvis){
+      morphed_high = sys_nonclosure_t_up->GetY()[i]; //(-sys_nonclosure_t_down->GetY()[i_morph_mvis])*float( n_morph_mvis-i_morph_mvis-1)/(n_morph_mvis-1) + (sys_nonclosure_t_up->GetY()[i_morph_mvis])*float(i_morph_mvis)/(n_morph_mvis-1);
+      morphed_low = -sys_nonclosure_t_down->GetY()[i]; // (sys_nonclosure_t_up->GetY()[i_morph_mvis])*float( n_morph_mvis-i_morph_mvis-1)/(n_morph_mvis-1) + (-sys_nonclosure_t_down->GetY()[i_morph_mvis])*float(i_morph_mvis)/(n_morph_mvis-1);
+    }
     out_t_sf->SetBinContent(i,scale_factors[0]);
     out_t_up->SetBinContent(i, morphed_high);  
     out_t_down->SetBinContent(i, morphed_low);    
