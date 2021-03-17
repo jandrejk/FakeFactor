@@ -13,6 +13,9 @@ GaussianKernelSmoother::GaussianKernelSmoother(){
   this->kernelDistance="lin";
   this->lastBinFrom=-1;
   this->doLastBinFrom=0;
+  this->lastBinNonFlat=-1;
+  this->doMakeFlatFrom=0;
+  
 }
 
 TH1D* GaussianKernelSmoother::fluctuateHisto(){
@@ -199,7 +202,12 @@ void GaussianKernelSmoother::getContSmoothHisto(){
     double x_0 = 0;
     for (int i=0; i<nbins; i++){
       if (doLastBinFrom && xs[i] > lastBinFrom) {
-        ys_err[i] = lastYerror * (1 + 10*(xs[i]-x_0) / (nbins-x_0) );
+        if (doMakeFlatFrom && xs[i] > lastBinNonFlat) {
+          ys_err[i] = ys_err[i-1];
+        }
+        else {
+          ys_err[i] = lastYerror * (1 + 10*(xs[i]-x_0) / (nbins-x_0) );
+        }
       }
       else {
         lastYerror = this->std_dev( toys[i] );
