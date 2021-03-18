@@ -583,11 +583,13 @@ const Double_t w_mvis_v[]={0,40,50,60,70,80,90,100,120,140,160,180,200,250,400,6
 const Int_t w_mvis_n=(sizeof(w_mvis_v)/sizeof(Double_t)) -1;
 
 #if(selCHAN == kEL)
-const Double_t w_lepPt_v[]={23,26,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,250};
+// const Double_t w_lepPt_v[]={23,26,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,250};
+const Double_t w_lepPt_v[]={25,30,40,50,60,70,80,90,100,120,250};
 const Int_t w_lepPt_n=(sizeof(w_lepPt_v)/sizeof(Double_t)) -1;
 #endif
 #if(selCHAN == kMU)
-const Double_t w_lepPt_v[]={25,28,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,250};
+// const Double_t w_lepPt_v[]={25,28,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,110,120,250};
+const Double_t w_lepPt_v[]={25,30,40,50,60,70,80,90,100,120,250};
 const Int_t w_lepPt_n=(sizeof(w_lepPt_v)/sizeof(Double_t)) -1;
 #endif
 #if(selCHAN == kTAU)
