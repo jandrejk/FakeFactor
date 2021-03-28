@@ -89,6 +89,10 @@ python cpTDHaftPublic.py --destination $output --channel $channel --doNjetBinnin
 echo $output $channel $njetbinning
 python producePublicFakeFactors.py --input $output --channel $channel --njetbinning $njetbinning
 
+cd ViennaTool
+python plot_systematics.py $chan
+cd - 
+
 if [ $saveWork == 1 ] ; then
 	echo "------- SAVE WORK ---------"
 	cd ViennaTool
