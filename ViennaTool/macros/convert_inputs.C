@@ -1044,7 +1044,7 @@ void combineWSystematics_morphed( TString fW_nonclosure, TString sys_nonclosure,
     n_morph_lepPt += 1;
     i_morph_lepPt = i;
   }
-  double mt_max = 160.0;
+  double mt_max = 400.0; // it is mvis actually for the mT DR-SR correction
   Int_t n_morph_mt = 0; Int_t i_morph_mt = 0;
   for(Int_t i=0; sys_mtcorr_t_up->GetX()[i] < mt_max; i++){
     n_morph_mt += 1;
