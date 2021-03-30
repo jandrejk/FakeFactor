@@ -3545,7 +3545,7 @@ void FFCalculator::calc_mtcorr(const Int_t mode, const TString raw_ff, const TSt
   gsk.set_doWidthInBins(1);
   gsk.setWidth(1.2);
   gsk.set_widthInBins_sf(0.1);
-  gsk.set_lastBinFrom(400);
+  gsk.set_lastBinFrom(600);
   gsk.set_lastBinBeforeFlat(800);
 
   /*
